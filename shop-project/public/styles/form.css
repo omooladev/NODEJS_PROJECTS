@@ -1,0 +1,54 @@
+.product_form {
+  width: 90%;
+  max-width: 25rem;
+  margin: auto;
+  padding: 0.5rem 1rem;
+}
+
+.product_form .form_controls .form_control {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+.product_form .form_controls .form_control label {
+  font-size: 1.2rem;
+  padding: 0.3rem 0;
+}
+.product_form .form_controls .form_control input {
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 0.6rem;
+  outline: 1px solid black;
+  border-radius: 0.2rem;
+}
+.product_form .form_controls .form_control input:focus {
+  outline: 1px solid orangered;
+}
+.product_form .form_controls .form_control .form_control_details {
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+/*important This style is for the image */
+.product_form .form_controls .form_control.image_control {
+  flex-direction: row;
+}
+.product_form .form_controls .form_control.image_control input {
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+.product_form .form_actions {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+.product_form .form_actions button {
+  background-color: orangered;
+  padding: 0.6rem 0.6rem;
+  width: 100%;
+  border-radius: 0.2rem;
+  color: white;
+}
+.product_form .form_actions button:hover {
+  background-color: rgba(255, 69, 0, 0.9);
+  color: white;
+}

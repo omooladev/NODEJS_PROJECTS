@@ -1,9 +1,42 @@
 <%-include("includes/head")%>
+ <link rel="stylesheet" href="/styles/product.css" />
+ <script src="/scripts/script.js" defer></script>
 </head>
 <body>
     <%-include("includes/navigation")%>
     <main class="main">
-        <h1>This is the page where you see all of the products available</h1>
+        <h2>Products Available in store</h2>
+        <div class="products">
+            <div class="product_card">
+                <div class="product_image">
+                    <img alt="bugatti image" src="https://upload.wikimedia.org/wikipedia/commons/6/62/Bugatti_Chiron_%2836559710091%29.jpg"/>
+                </div>
+                    <div class="product_info">
+                    <h3 class="product_name">Bugatti Chiron</h3>
+                    <h4 class="product_description">The Bugatti Chiron is a mid-engine two-seater sports car designed and developed in Germany by Bugatti Engineering GmbH[7] and manufactured in Molsheim, France, by French automobile manufacturer Bugatti Automobiles S.A.S.</h4>
+                 <h4 class="product_price" title="$2.9 Million">$2.9 Million</h3>
+                </div>
+                <div class="product_actions">
+                    <button type="button">Purchase now</button>
+                </div>
+            </div>
+             <div class="product_card">
+                <div class="product_image">
+                    <img alt="bugatti image" src="https://supercarblondie.com/wp-content/uploads/Bugatti-W16-Mistral-roadster-yellow.jpg"/>
+                </div>
+                    <div class="product_info">
+                    <h3 class="product_name">Bugatti Mistral Roadster</h3>
+                    <h4 class="product_description">Rear view Interior The Mistral is not a cabriolet version of the Bugatti Chiron but rather a separate roadster model for Bugatti   The Bugatti Mistral, also called the Bugatti W16 Mistral, is a mid-engine two-seater sports car manufactured in Molsheim, France, by French automobile manufacturer Bugatti Automobiles S.A.S. It was revealed on 19 August 2022.[5] The Mistral is marketed as the fastest roadster in the world.[6] Deliveries to customers will begin in early 2024.[7] All 99 units were pre-sold at a price of 5 million euros.[8] 
+                        Rear view Interior The Mistral is not a cabriolet version of the Bugatti Chiron but rather a separate roadster model for Bugatti that marks the last vehicle to use the W16 engine that was introduced with the Bugatti Veyron in 2005.[9]</h4>
+                 
+                  <h4 class="product_price" title="$5 Million">$5 Million</h3>
+                    </div>
+                <div class="product_actions">
+                    <button type="button">Purchase now</button>
+                </div>
+            </div>
+        </div>
+        
     </main>
    
 </body>

@@ -1,0 +1,30 @@
+<%-include("includes/head")%>
+<link rel="stylesheet" href="/styles/form.css" />
+<script src="/scripts/form.js" defer></script>
+</head>
+<body>
+    <%-include("includes/navigation")%>
+    <main class="main">
+        <form class="product_form">
+            <h2>Add a new product</h2>
+            <div class="form_controls">
+                <div class="form_control">
+                    <label for="product_name">Name</label>
+                    <input type="text" id="product_name" placeholder="e.g Iphone 13" name="product_name"/>
+                </div>
+                 <div class="form_control">
+                    <label for="product_price">Price</label>
+                    <input type="text" id="product_price" placeholder="e.g 200" name="product_price"/>
+                    <p class="form_control_details">Default Currency is dollars ($)</p>
+                </div>
+                 <div class="form_control image_control">
+                    <label for="product_image">Image</label>
+                    <input type="file" id="product_image" name="product_image"/>
+                    <div class="image_container">
+                    </div>
+                </div>
+            </div>
+            <div class="form_actions"> <button type="submit">Add Product</button></div>
+        </form>
+    </main>
+</body>
