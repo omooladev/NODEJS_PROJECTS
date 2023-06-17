@@ -64,3 +64,8 @@
   background-color: rgba(255, 69, 0, 0.9);
   color: white;
 }
+.product_form .form_actions button:disabled {
+  cursor: not-allowed;
+  background-color: rgba(63, 21, 5, 0.9);
+  color: rgb(155, 151, 151);
+}
