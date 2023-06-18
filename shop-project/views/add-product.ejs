@@ -1,6 +1,7 @@
 <%-include("includes/head")%>
 <link rel="stylesheet" href="/styles/form.css" />
-<script src="/scripts/form.js" defer></script>
+<script src="/scripts/form/form.js" defer></script>
+<script src="/scripts/form/product.js" defer></script>
 </head>
 <body>
     <%-include("includes/navigation")%>
@@ -19,8 +20,10 @@
                     <p class="form_control_details">Default Currency is dollars ($)</p>
                 </div>
                  <div class="form_control image_control">
-                    <label for="product_image">Image</label>
-                    <input type="file" id="product_image" name="product_image" accept="image/"/>
+                    <div class="control">
+                        <label for="product_image">Image</label>
+                        <input type="file" id="product_image" name="product_image" accept="image/"/>
+                    </div>
                     <div class="image_container">
                     </div>
                 </div>
