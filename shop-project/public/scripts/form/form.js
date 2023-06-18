@@ -3,7 +3,7 @@ const productForm = document.querySelector(".product_form");
 const productFormReply = document.querySelector(".form_reply");
 const productFormButton = document.querySelector(".product_form button");
 
-let transformedImage;
+let productImageFile;
 let productFormInputIsValid = {
   productNameIsValid: false,
   productPriceIsValid: false,
@@ -45,9 +45,11 @@ const submitFormHandler = async (event) => {
   let newProduct = {
     productName: productName.value,
     productPrice: productPrice.value,
-    productImage: transformedImage,
+    productImage: productImageFile,
   };
-  console.log(newProduct);
+  const response = await axios.post("/admin/add-product", newProduct, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   setFormReply({ replyMessage: "Product item added successfully", replyClass: "success" });
 };
 //important-------->Event Listeners
