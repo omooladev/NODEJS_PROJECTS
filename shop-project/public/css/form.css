@@ -26,19 +26,29 @@
   font-size: 1.2rem;
   padding: 0.3rem 0;
 }
-.product_form .form_controls .form_control input {
+.product_form .form_controls .form_control input,
+.product_form .form_controls .form_control textarea {
   border: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 0.5rem 0.6rem;
   outline: 1px solid black;
   border-radius: 0.2rem;
 }
-.product_form .form_controls .form_control input:focus {
+.product_form .form_controls .form_control input:focus,
+.product_form .form_controls .form_control textarea:focus {
   outline: 1px solid orangered;
 }
 .product_form .form_controls .form_control .form_control_details {
   font-size: 0.9rem;
   padding: 0.3rem 0;
+}
+.product_form .form_controls .form_control textarea {
+  resize: none;
+  height: 5rem;
+  line-height: 1.8rem;
+}
+.product_form .form_controls .form_control .product_description_length {
+  text-align: right;
 }
 /*important This style is for the image */
 .product_form .form_controls .form_control.image_control {
