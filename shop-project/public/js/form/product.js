@@ -10,6 +10,7 @@ const transformImage = async (imageFile) => {
     fileReader.readAsDataURL(imageFile);
     fileReader.onloadend = () => {
       productImageFile = imageFile;
+      transformedImage = fileReader.result;
       productImagePreview.style.backgroundImage = `url(${fileReader.result})`;
       productImagePreview.style.display = "block";
       return checkFormValidity();

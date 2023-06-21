@@ -4,6 +4,7 @@ const productFormReply = document.querySelector(".form_reply");
 const productFormButton = document.querySelector(".product_form button");
 
 let productImageFile;
+let transformedImage;
 let productFormInputIsValid = {
   productNameIsValid: false,
   productPriceIsValid: false,
@@ -14,7 +15,6 @@ let productFormInputIsValid = {
 const checkFormValidity = () => {
   const { productNameIsValid, productPriceIsValid, productImageIsValid } = productFormInputIsValid;
   const formIsValid = productNameIsValid && productPriceIsValid && productImageIsValid;
-
   if (!formIsValid) {
     productFormButton.disabled = true;
     return;
@@ -45,12 +45,34 @@ const submitFormHandler = async (event) => {
   let newProduct = {
     productName: productName.value,
     productPrice: productPrice.value,
+    productTransformedImage: transformedImage,
     productImage: productImageFile,
   };
-  const response = await axios.post("/admin/add-product", newProduct, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
-  setFormReply({ replyMessage: "Product item added successfully", replyClass: "success" });
+  productFormButton.disabled = true;
+  try {
+    const { data } = await axios.post("/admin/add-product", newProduct, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    if (data) {
+      setFormReply({
+        replyMessage: "Product item added successfully",
+        replyClass: "success",
+      });
+    }
+  } catch (error) {
+    formatResponseError(error, (errorMessage) => {
+      setFormReply({
+        replyMessage: errorMessage,
+        replyClass: "error",
+      });
+    });
+  }
+  productFormButton.disabled = false;
+};
+
+const formatResponseError = (error, callback) => {
+  const errorMessage = error.response.data.message || error.message;
+  return callback(errorMessage);
 };
 //important-------->Event Listeners
 productForm.addEventListener("submit", submitFormHandler);
