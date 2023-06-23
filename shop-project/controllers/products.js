@@ -4,13 +4,22 @@ const viewAddProductPage = (req, res) => {
 };
 
 const addProductToList = (req, res) => {
-  const { productName, productPrice, productTransformedImage: productImageUrl } = req.body;
-  const { productImage } = req.files;
+  const {
+    productName,
+    productPrice,
+    productDescription,
+    productTransformedImage: productImageUrl,
+  } = req.body;
+  const { productImage } = req.files || "";
 
-  if (!productName || !productPrice || !productImageUrl || !productImage) {
+  if (!productName || !productPrice || !productDescription || !productImageUrl || !productImage) {
     return res.status(400).json({ message: "Please provide values for all the fields" });
   }
-  const product = new Product(productName, productPrice, productImageUrl);
+
+  if (productDescription.trim().length > 500) {
+    return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
+  }
+  const product = new Product(productName, productPrice, productDescription, productImageUrl);
   product.save(({ success, message }) => {
     if (success === true) {
       return res.status(201).json({ message });

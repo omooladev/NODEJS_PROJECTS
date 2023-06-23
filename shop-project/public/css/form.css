@@ -44,7 +44,7 @@
 }
 .product_form .form_controls .form_control textarea {
   resize: none;
-  height: 5rem;
+  height: 80px;
   line-height: 1.8rem;
 }
 .product_form .form_controls .form_control .product_description_length {

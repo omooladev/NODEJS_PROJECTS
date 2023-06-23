@@ -1,8 +1,4 @@
-//* Get form input elements
-const productName = document.querySelector("#product_name");
-const productPrice = document.querySelector("#product_price");
-const productImage = document.querySelector("#product_image");
-const productImagePreview = document.querySelector(".image_container");
+
 
 const transformImage = async (imageFile) => {
   const fileReader = new FileReader();
@@ -38,7 +34,30 @@ const changeProductInputHandler = (event, { inputType }) => {
   checkFormValidity();
   resetFormReply();
 };
-
+const changeProductDescriptionHandler = (event) => {
+  setProductDescriptionLength(event.target.value);
+};
+const setProductDescriptionLength = (productDescriptionValue) => {
+  const productDescriptionLengthValue = productDescriptionValue.length;
+  productDescriptionLength.innerHTML = productDescriptionLengthValue;
+  if (productDescriptionValue.trim().length === 0) {
+    productFormInputIsValid.productDescriptionIsValid = false;
+    setFormReply({
+      replyMessage: `Please provide a product description`,
+      replyClass: "error",
+    });
+  } else {
+    resetFormReply();
+    if (productDescriptionLengthValue <= 500) {
+      productDescriptionLength.style.color = "black";
+      productFormInputIsValid.productDescriptionIsValid = true;
+    } else {
+      productDescriptionLength.style.color = "red";
+      productFormInputIsValid.productDescriptionIsValid = false;
+    }
+  }
+  return checkFormValidity();
+};
 const changeProductImageHandler = async (event) => {
   const imageFile = event.target.files[0];
   if (!imageFile.type.includes("image/")) {
@@ -72,5 +91,5 @@ productName.addEventListener("input", (event) =>
 productPrice.addEventListener("input", (event) =>
   changeProductInputHandler(event, { inputType: "Price" })
 );
-
+productDescription.addEventListener("input", changeProductDescriptionHandler);
 productImage.addEventListener("change", changeProductImageHandler);

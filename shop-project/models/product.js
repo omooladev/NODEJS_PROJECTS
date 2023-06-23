@@ -14,9 +14,10 @@ const getAllProducts = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(productName, productPrice, productImageUrl) {
+  constructor(productName, productPrice, productDescription, productImageUrl) {
     this.productName = productName;
     this.productPrice = productPrice;
+    this.productDescription = productDescription;
     this.productImageUrl = productImageUrl;
   }
 

@@ -2,19 +2,33 @@
 const productForm = document.querySelector(".product_form");
 const productFormReply = document.querySelector(".form_reply");
 const productFormButton = document.querySelector(".product_form button");
+//* Get form input elements
+const productName = document.querySelector("#product_name");
+const productPrice = document.querySelector("#product_price");
+const productDescription = document.querySelector("#product_description");
+const productImage = document.querySelector("#product_image");
+const productImagePreview = document.querySelector(".image_container");
 
+const productDescriptionLength = document.querySelector("#product_description_length");
 let productImageFile;
 let transformedImage;
 let productFormInputIsValid = {
   productNameIsValid: false,
   productPriceIsValid: false,
+  productDescriptionIsValid: false,
   productImageIsValid: false,
 };
-
 //important-------->functions
 const checkFormValidity = () => {
-  const { productNameIsValid, productPriceIsValid, productImageIsValid } = productFormInputIsValid;
-  const formIsValid = productNameIsValid && productPriceIsValid && productImageIsValid;
+  const {
+    productNameIsValid,
+    productPriceIsValid,
+    productImageIsValid,
+    productDescriptionIsValid,
+  } = productFormInputIsValid;
+  const formIsValid =
+    productNameIsValid && productPriceIsValid && productDescriptionIsValid && productImageIsValid;
+
   if (!formIsValid) {
     productFormButton.disabled = true;
     return;
@@ -45,6 +59,7 @@ const submitFormHandler = async (event) => {
   let newProduct = {
     productName: productName.value,
     productPrice: productPrice.value,
+    productDescription: productDescription.value,
     productTransformedImage: transformedImage,
     productImage: productImageFile,
   };
@@ -58,6 +73,9 @@ const submitFormHandler = async (event) => {
         replyMessage: "Product item added successfully",
         replyClass: "success",
       });
+      setTimeout(() => {
+        return resetProductInputsValues();
+      }, 2000);
     }
   } catch (error) {
     formatResponseError(error, (errorMessage) => {
@@ -70,6 +88,23 @@ const submitFormHandler = async (event) => {
   productFormButton.disabled = false;
 };
 
+const resetProductInputsValues = () => {
+  productName.value = "";
+  productPrice.value = "";
+  productImage.value = "";
+  productDescription.value = "";
+  productImageFile = "";
+  transformedImage = "";
+  productDescriptionLength.innerHTML = "0";
+  productImagePreview.style.backgroundImage = ``;
+  productImagePreview.style.display = "none";
+  productFormInputIsValid.productNameIsValid = false;
+  productFormInputIsValid.productPriceIsValid = false;
+  productFormInputIsValid.productDescriptionIsValid = false;
+  productFormInputIsValid.productImageIsValid = false;
+  checkFormValidity();
+  resetFormReply();
+};
 const formatResponseError = (error, callback) => {
   const errorMessage = error.response.data.message || error.message;
   return callback(errorMessage);
