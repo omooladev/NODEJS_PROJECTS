@@ -28,4 +28,10 @@ const addProductToList = (req, res) => {
   });
 };
 
-module.exports = { viewAddProductPage, addProductToList };
+const getAllProducts = (req, res) => {
+  Product.fetchAllProducts((products) => {
+    console.log(products);
+    res.render("shop", { path: "/", pageTitle: "Shop", products });
+  });
+};
+module.exports = { viewAddProductPage, addProductToList, getAllProducts };

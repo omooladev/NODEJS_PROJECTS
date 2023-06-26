@@ -8,18 +8,22 @@
 }
 
 .products .product_card {
-  max-height: 50rem;
+  height: auto;
   width: 25rem;
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: white;
-  padding-bottom: 1rem;
   margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .products .product_card .product_image {
   width: 100%;
   height: 20rem;
+  overflow: hidden;
 }
 .products .product_card .product_image img {
   width: 100%;
@@ -31,25 +35,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
   text-align: center;
 }
 
 .products .product_card .product_info .product_name {
-  padding: 0.5rem 0;
   text-transform: uppercase;
   width: 100%;
+  padding: 0.5rem 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .products .product_card .product_info .product_description {
-  padding: 0.5rem 0;
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.5rem;
   width: 100%;
-  height: 180px;
+  padding: 0.5rem 0;
   overflow: hidden;
 }
 .products .product_card .product_info .product_price {

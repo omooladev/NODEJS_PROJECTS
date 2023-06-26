@@ -34,4 +34,10 @@ module.exports = class Product {
       });
     });
   }
+
+  static fetchAllProducts(callback) {
+    getAllProducts((products) => {
+      return callback(products);
+    });
+  }
 };

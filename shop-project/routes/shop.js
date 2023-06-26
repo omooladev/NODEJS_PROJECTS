@@ -1,10 +1,9 @@
 //? import statements
 const express = require("express");
+const { getAllProducts } = require("../controllers/products");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("shop", { pageTitle: "Shop", path: "/" });
-});
+router.get("/", getAllProducts);
 
 module.exports = router;

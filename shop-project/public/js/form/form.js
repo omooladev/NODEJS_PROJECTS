@@ -74,7 +74,7 @@ const submitFormHandler = async (event) => {
         replyClass: "success",
       });
       setTimeout(() => {
-        return resetProductInputsValues();
+        return resetProductInputs();
       }, 2000);
     }
   } catch (error) {
@@ -88,7 +88,7 @@ const submitFormHandler = async (event) => {
   productFormButton.disabled = false;
 };
 
-const resetProductInputsValues = () => {
+const resetProductInputs = () => {
   productName.value = "";
   productPrice.value = "";
   productImage.value = "";
