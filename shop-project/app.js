@@ -18,7 +18,6 @@ app.use(express.json());
 app.use(fileUpload({}));
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use("/admin", adminRouter);
 app.use("", shopRouter);
 
@@ -31,3 +30,8 @@ const start = () => {
 
 //important-----> Start server
 start();
+
+console.log(
+  "Rear view Interior The Mistral is not a cabriolet version of the Bugatti Chiron but rather a separate roadster model for Bugatti The"
+    .length
+);

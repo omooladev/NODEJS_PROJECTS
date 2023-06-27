@@ -65,12 +65,12 @@ const changeProductImageHandler = async (event) => {
     productFormInputIsValid.productImageIsValid = false;
     return checkFormValidity();
   }
-  const maxSize = 1024 * 1024; //? This is 1MB
+  const maxSize = 1024 * 1024 * 5; //? This is 5MB
   const imageSize = imageFile.size;
 
   if (imageSize > maxSize) {
     setFormReply({
-      replyMessage: "Please upload a picture smaller than 1MB",
+      replyMessage: "Please upload a picture smaller than 5MB",
       replyClass: "error",
     });
     productImagePreview.style.backgroundImage = ``;
