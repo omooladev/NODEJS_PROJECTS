@@ -30,7 +30,6 @@ const addProductToList = (req, res) => {
 
 const getAllProducts = (req, res) => {
   Product.fetchAllProducts((products) => {
-    console.log(products);
     res.render("shop", { path: "/", pageTitle: "Shop", products });
   });
 };
