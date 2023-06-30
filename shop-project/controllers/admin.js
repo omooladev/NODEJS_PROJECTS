@@ -30,8 +30,18 @@ const addProductToList = (req, res) => {
 
 const getAllProducts = (req, res) => {
   Product.fetchAllProducts((products) => {
-    res.render("admin/products", { products, path: "admin/products", pageTitle: "Admin Products" });
+    res.render("admin/products", {
+      products,
+      path: "/admin/products",
+      pageTitle: "Admin Products",
+    });
   });
 };
 
-module.exports = { viewAddProductPage, addProductToList, getAllProducts };
+const deleteProduct = (req, res) => {
+  const { productId } = req.params;
+  console.log(productId);
+  res.redirect("/admin/products");
+};
+
+module.exports = { viewAddProductPage, addProductToList, getAllProducts, deleteProduct };

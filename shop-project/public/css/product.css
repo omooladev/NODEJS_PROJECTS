@@ -8,6 +8,7 @@
   padding: 0.5rem 0;
 }
 .products .product_card {
+  cursor: pointer;
   height: 35rem;
   width: 20rem;
   background-color: white;
@@ -68,6 +69,14 @@
 }
 .products .product_card .product_actions {
   margin: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.products .product_card .product_actions form {
+  width: 45%;
+  border-radius: 0.5rem;
 }
 .products .product_card .product_actions button {
   display: inline-block;
@@ -79,7 +88,7 @@
   text-transform: uppercase;
   transition: 0.3s ease;
 }
-.products .product_card .product_actions button:hover {
+.products .product_card .product_actions form button:hover {
   background-color: rgba(255, 69, 0, 0.9);
   transition: 0.6s ease all;
   border-radius: 1.5rem;
