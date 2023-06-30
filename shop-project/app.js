@@ -2,6 +2,10 @@
 const path = require("path");
 const express = require("express");
 const fileUpload = require("express-fileupload");
+const swaggerUI = require("swagger-ui-express");
+
+//----------> documentation
+const swaggerDocumentation = require("./documentation/swaggerDocumentation");
 
 //? routes
 const adminRouter = require("./routes/admin");
@@ -18,6 +22,10 @@ app.use(express.json());
 app.use(fileUpload({}));
 app.use(express.static(path.join(__dirname, "public")));
 
+//----------> documentation route
+app.use("/api/docs", swaggerUI.serve);
+app.use("/api/docs", swaggerUI.setup(swaggerDocumentation));
+
 app.use("/admin", adminRouter);
 app.use("", shopRouter);
 
@@ -30,8 +38,3 @@ const start = () => {
 
 //important-----> Start server
 start();
-
-console.log(
-  "Rear view Interior The Mistral is not a cabriolet version of the Bugatti Chiron but rather a separate roadster model for Bugatti The"
-    .length
-);
