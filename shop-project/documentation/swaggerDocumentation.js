@@ -10,6 +10,16 @@ const swaggerDocumentation = {
       "The ShopCommerce API is a RESTful API that allows users to purchase products and administrators to add products",
   },
   servers: [{ url: "http://localhost:5000/", description: "Local Dev" }],
+  tags: [
+    {
+      name: "Admin",
+      description: "This is for the admin",
+    },
+    {
+      name: "User",
+      description: "This is for the user",
+    },
+  ],
   paths: { ...adminDocs, ...userDocs },
 };
 

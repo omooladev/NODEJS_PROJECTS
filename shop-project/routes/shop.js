@@ -1,6 +1,6 @@
 //? import statements
 const express = require("express");
-const { getAllProducts } = require("../controllers/products");
+const { getAllProducts } = require("../controllers/user");
 
 const router = express.Router();
 

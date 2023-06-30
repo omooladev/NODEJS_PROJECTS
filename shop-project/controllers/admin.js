@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 const viewAddProductPage = (req, res) => {
-  res.render("add-product", { pageTitle: "Add New Product", path: "/admin/add-product" });
+  res.render("admin/add-product", { pageTitle: "Add New Product", path: "/admin/add-product" });
 };
 
 const addProductToList = (req, res) => {
@@ -30,7 +30,8 @@ const addProductToList = (req, res) => {
 
 const getAllProducts = (req, res) => {
   Product.fetchAllProducts((products) => {
-    res.render("shop", { path: "/", pageTitle: "Shop", products });
+    res.render("admin/products", { products, path: "admin/products", pageTitle: "Admin Products" });
   });
 };
+
 module.exports = { viewAddProductPage, addProductToList, getAllProducts };

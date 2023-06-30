@@ -1,6 +1,40 @@
 const addProductRoute = {
   tags: ["Admin"],
   description: "Add Products to the database",
+  requestBody: {
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            Name: {
+              type: "string",
+              description: "Please provide product name",
+              example: "Product name",
+            },
+            Price: {
+              type: "number",
+              description: "Please provide product price",
+              example: 5000,
+            },
+            Description: {
+              type: "string",
+              description: "Please provide product description",
+              example: "This is the product description",
+            },
+            Image: {
+              content: {
+                file: {
+                  type: "string",
+                  format: "binary",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
   responses: {
     201: {
       description: "CREATED",
