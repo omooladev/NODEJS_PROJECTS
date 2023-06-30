@@ -5,10 +5,10 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 .products .product_card {
-  height: 30rem;
+  height: 35rem;
   width: 20rem;
   background-color: white;
   margin: 1rem;
