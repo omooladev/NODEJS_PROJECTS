@@ -1,7 +1,4 @@
 const Product = require("../models/product");
-const viewAddProductPage = (req, res) => {
-  res.render("admin/add-product", { pageTitle: "Add New Product", path: "/admin/add-product" });
-};
 
 const addProductToList = (req, res) => {
   const {
@@ -45,4 +42,18 @@ const deleteProduct = (req, res) => {
   });
 };
 
-module.exports = { viewAddProductPage, addProductToList, getAllProducts, deleteProduct };
+//----------> view add product page
+const viewAddProductPage = (req, res) => {
+  res.render("admin/product-management", 
+  { pageTitle: "Add New Product", path: "/admin/add-product",isEditing:false });
+};
+
+//----------> view edit product page
+const viewEditProductPage = (req, res) => {
+  res.render("admin/product-management", {
+    pageTitle: "Edit Product",
+    path: "/admin/edit-product",
+    isEditing:true,
+  });
+};
+module.exports = { viewAddProductPage,viewEditProductPage, addProductToList, getAllProducts, deleteProduct };
