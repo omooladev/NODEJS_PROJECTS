@@ -40,8 +40,9 @@ const getAllProducts = (req, res) => {
 
 const deleteProduct = (req, res) => {
   const { productId } = req.params;
-  console.log(productId);
-  res.redirect("/admin/products");
+  Product.deleteProduct(productId, () => {
+    res.redirect("/admin/products");
+  });
 };
 
 module.exports = { viewAddProductPage, addProductToList, getAllProducts, deleteProduct };

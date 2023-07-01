@@ -40,4 +40,15 @@ module.exports = class Product {
       return callback(products);
     });
   }
+
+  static deleteProduct(productId, callback) {
+    getAllProducts((products) => {
+      const filteredProducts = products.filter((product) => productId !== product.id.toString());
+      fs.writeFile(pathToProductsList, JSON.stringify(filteredProducts), (error, fileContent) => {
+        if (!error) {
+          return callback();
+        }
+      });
+    });
+  }
 };
