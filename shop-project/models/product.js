@@ -14,12 +14,12 @@ const getAllProducts = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(productName, productPrice, productDescription, productImageUrl,productImageFile) {
+  constructor(productName, productPrice, productDescription, productImageUrl, productImageFile) {
     this.productName = productName;
     this.productPrice = productPrice;
     this.productDescription = productDescription;
     this.productImageUrl = productImageUrl;
-    this.productImageFile=productImageFile
+    this.productImageFile = productImageFile;
   }
 
   save(callback) {
@@ -36,11 +36,11 @@ module.exports = class Product {
     });
   }
 
-  static findById (productId,callback){
-    getAllProducts((products)=>{
-      const product=products.find(product=>product.id.toString()===productId)
-      return callback(product)
-    })
+  static findById(productId, callback) {
+    getAllProducts((products) => {
+      const product = products.find((product) => product.id.toString() === productId);
+      return callback(product);
+    });
   }
   static fetchAllProducts(callback) {
     getAllProducts((products) => {
@@ -49,12 +49,18 @@ module.exports = class Product {
   }
 
   static deleteProduct(productId, callback) {
+    //----------> get all products
     getAllProducts((products) => {
+      //----------> filter the products by removing the product whose id matches the productId
       const filteredProducts = products.filter((product) => productId !== product.id.toString());
+
+      //----------> write the filtered products to the products.json file
       fs.writeFile(pathToProductsList, JSON.stringify(filteredProducts), (error, fileContent) => {
         if (!error) {
+          //----------> if no error is found, then return the callback
           return callback();
         }
+        console.log(error);
       });
     });
   }

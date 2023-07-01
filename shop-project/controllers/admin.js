@@ -7,7 +7,7 @@ const addProductToList = (req, res) => {
     productDescription,
     productTransformedImage: productImageUrl,
   } = req.body;
-  return console.log(req.body)
+  return console.log(req.body);
   const { productImage } = req.files || "";
 
   if (!productName || !productPrice || !productDescription || !productImageUrl || !productImage) {
@@ -37,28 +37,41 @@ const getAllProducts = (req, res) => {
 };
 
 const deleteProduct = (req, res) => {
+  //----------> get product id
   const { productId } = req.params;
+
+  //----------> delete product
   Product.deleteProduct(productId, () => {
+    //---------->redirect to the admin products page when a product is deleted
     res.redirect("/admin/products");
   });
 };
 
 //----------> view add product page
 const viewAddProductPage = (req, res) => {
-  res.render("admin/product-management", 
-  { pageTitle: "Add New Product", path: "/admin/add-product",isEditing:false });
+  res.render("admin/product-management", {
+    pageTitle: "Add New Product",
+    path: "/admin/add-product",
+    isEditing: false,
+  });
 };
 
 //----------> view edit product page
 const viewEditProductPage = (req, res) => {
-  const { productId } =req.params 
-  Product.findById(productId,(product)=>{
+  const { productId } = req.params;
+  Product.findById(productId, (product) => {
     res.render("admin/product-management", {
       product,
       pageTitle: "Edit Product",
       path: "/admin/edit-product",
       isEditing: true,
-  });})
-  
+    });
+  });
 };
-module.exports = { viewAddProductPage,viewEditProductPage, addProductToList, getAllProducts, deleteProduct };
+module.exports = {
+  viewAddProductPage,
+  viewEditProductPage,
+  addProductToList,
+  getAllProducts,
+  deleteProduct,
+};
