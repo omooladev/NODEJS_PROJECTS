@@ -14,11 +14,12 @@ const getAllProducts = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(productName, productPrice, productDescription, productImageUrl) {
+  constructor(productName, productPrice, productDescription, productImageUrl,productImageFile) {
     this.productName = productName;
     this.productPrice = productPrice;
     this.productDescription = productDescription;
     this.productImageUrl = productImageUrl;
+    this.productImageFile=productImageFile
   }
 
   save(callback) {
@@ -35,6 +36,12 @@ module.exports = class Product {
     });
   }
 
+  static findById (productId,callback){
+    getAllProducts((products)=>{
+      const product=products.find(product=>product.id.toString()===productId)
+      return callback(product)
+    })
+  }
   static fetchAllProducts(callback) {
     getAllProducts((products) => {
       return callback(products);

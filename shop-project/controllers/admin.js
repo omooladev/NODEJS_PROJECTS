@@ -7,6 +7,7 @@ const addProductToList = (req, res) => {
     productDescription,
     productTransformedImage: productImageUrl,
   } = req.body;
+  return console.log(req.body)
   const { productImage } = req.files || "";
 
   if (!productName || !productPrice || !productDescription || !productImageUrl || !productImage) {
@@ -50,10 +51,14 @@ const viewAddProductPage = (req, res) => {
 
 //----------> view edit product page
 const viewEditProductPage = (req, res) => {
-  res.render("admin/product-management", {
-    pageTitle: "Edit Product",
-    path: "/admin/edit-product",
-    isEditing:true,
-  });
+  const { productId } =req.params 
+  Product.findById(productId,(product)=>{
+    res.render("admin/product-management", {
+      product,
+      pageTitle: "Edit Product",
+      path: "/admin/edit-product",
+      isEditing: true,
+  });})
+  
 };
 module.exports = { viewAddProductPage,viewEditProductPage, addProductToList, getAllProducts, deleteProduct };
