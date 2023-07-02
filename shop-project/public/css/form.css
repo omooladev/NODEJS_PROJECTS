@@ -62,13 +62,10 @@
   font-size: 1rem;
   outline: none;
 }
-.form_control.image_control .image_container {
+.form_control.image_control .preview_image {
+  display: none;
   width: 100%;
   height: 10rem;
-  display: none;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
 }
 .product_form .form_actions {
   font-size: 1rem;

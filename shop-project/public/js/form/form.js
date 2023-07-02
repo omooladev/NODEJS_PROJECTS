@@ -7,7 +7,7 @@ const productName = document.querySelector("#product_name");
 const productPrice = document.querySelector("#product_price");
 const productDescription = document.querySelector("#product_description");
 const productImage = document.querySelector("#product_image");
-const productImagePreview = document.querySelector(".image_container");
+const productImagePreview = document.querySelector(".preview_image");
 
 const productDescriptionLength = document.querySelector("#product_description_length");
 let productImageFile;
@@ -96,8 +96,8 @@ const resetProductInputs = () => {
   productImageFile = "";
   transformedImage = "";
   productDescriptionLength.innerHTML = "0";
-  productImagePreview.style.backgroundImage = ``;
-  productImagePreview.style.display = "none";
+  productImagePreview.src = ``;
+  productImagePreview.alt = "";
   productFormInputIsValid.productNameIsValid = false;
   productFormInputIsValid.productPriceIsValid = false;
   productFormInputIsValid.productDescriptionIsValid = false;
