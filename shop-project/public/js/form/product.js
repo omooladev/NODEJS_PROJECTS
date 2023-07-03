@@ -102,7 +102,7 @@ const transformImage = async (imageFile) => {
     productImagePreview.src = `${fileReader.result}`;
     productImagePreview.alt = "product image";
     productImagePreview.style.display = "block";
-   
+
     saveFormValidity();
   };
 };
@@ -149,6 +149,7 @@ productName.oninput = (event) => changeProductInputHandler(event, { inputType: "
 
 productPrice.oninput = (event) => changeProductInputHandler(event, { inputType: "Price" });
 
-productDescription.oninput = (event) => changeProductInputHandler(event, { inputType: "Description" });
+productDescription.oninput = (event) =>
+  changeProductInputHandler(event, { inputType: "Description" });
 
 productImage.onchange = (event) => changeProductImageHandler(event);

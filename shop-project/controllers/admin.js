@@ -4,14 +4,14 @@ const addProductToList = (req, res) => {
   const { name, price, description, transformedImage: imageUrl } = req.body;
   const { image } = req.files || "";
 
-  if (!name || !price || !description || !imageUrl || !image) {
+  if (!name || !price || !description || !imageUrl) {
     return res.status(400).json({ message: "Please provide values for all the fields" });
   }
 
   if (description.trim().length > 500) {
     return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
   }
-  const product = new Product(name, price, description, image, imageUrl);
+  const product = new Product(name, price, description, imageUrl);
   product.save(({ success, message }) => {
     if (success === true) {
       return res.status(201).json({ message });

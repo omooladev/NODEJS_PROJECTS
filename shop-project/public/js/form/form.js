@@ -17,10 +17,10 @@ let transformedImage;
 
 //----------> default validity
 let productFormInputIsValid = {
-  productNameIsValid: false,
-  productPriceIsValid: false,
-  productDescriptionIsValid: false,
-  productImageIsValid: false,
+  productNameIsValid: productName.value ? true : false,
+  productPriceIsValid: productName.value ? true : false,
+  productDescriptionIsValid: productName.value ? true : false,
+  productImageIsValid: productImagePreview.src ? true : false,
 };
 
 //----------> check validity of inputs and return validity of form
@@ -73,22 +73,25 @@ const submitFormHandler = async (event) => {
   //----------> reset reply when the form is submitted
   resetFormReply();
 
-  //----------> assign a variable for the new product
+  //----------> assign a variable for the new product and
   let newProduct = {
     name: productName.value,
     price: productPrice.value,
     description: productDescription.value,
-    image: productImageFile,
     transformedImage: transformedImage,
   };
-
+  const isEditing = productForm.className.includes("isEditing");
   try {
-    const { data } = await axios.post("/admin/add-product", newProduct, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const { data } = await axios.post(
+      `/admin${isEditing ? "/edit-product" : "/add-product"}`,
+      newProduct,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
     if (data) {
       setFormReply({
-        message: "Product item added successfully",
+        message: isEditing ? "Product edited successfully" : "Product item added successfully",
         type: "success",
       });
       setTimeout(() => {

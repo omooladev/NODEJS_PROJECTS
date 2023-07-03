@@ -6,7 +6,7 @@
 <body>
     <%-include("../includes/navigation")%>
     <main class="main">
-        <form class="product_form">
+        <form class="product_form <%=isEditing?"isEditing":""%>">
             <h2>
                <%=isEditing?"Edit Product":"Add a new product"%>
             </h2>
