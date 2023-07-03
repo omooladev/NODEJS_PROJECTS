@@ -1,23 +1,17 @@
 const Product = require("../models/product");
 
 const addProductToList = (req, res) => {
-  const {
-    productName,
-    productPrice,
-    productDescription,
-    productTransformedImage: productImageUrl,
-  } = req.body;
-  return console.log(req.body);
-  const { productImage } = req.files || "";
+  const { name, price, description, transformedImage: imageUrl } = req.body;
+  const { image } = req.files || "";
 
-  if (!productName || !productPrice || !productDescription || !productImageUrl || !productImage) {
+  if (!name || !price || !description || !imageUrl || !image) {
     return res.status(400).json({ message: "Please provide values for all the fields" });
   }
 
-  if (productDescription.trim().length > 500) {
+  if (description.trim().length > 500) {
     return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
   }
-  const product = new Product(productName, productPrice, productDescription, productImageUrl);
+  const product = new Product(name, price, description, image, imageUrl);
   product.save(({ success, message }) => {
     if (success === true) {
       return res.status(201).json({ message });

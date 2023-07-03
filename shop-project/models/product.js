@@ -14,12 +14,12 @@ const getAllProducts = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(productName, productPrice, productDescription, productImageUrl, productImageFile) {
-    this.productName = productName;
-    this.productPrice = productPrice;
-    this.productDescription = productDescription;
-    this.productImageUrl = productImageUrl;
-    this.productImageFile = productImageFile;
+  constructor(name, price, description, image, imageUrl) {
+    this.name = name;
+    this.price = price;
+    this.description = description;
+    this.image = image;
+    this.imageUrl = imageUrl;
   }
 
   save(callback) {

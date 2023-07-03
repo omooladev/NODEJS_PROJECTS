@@ -78,11 +78,10 @@ const submitFormHandler = async (event) => {
     name: productName.value,
     price: productPrice.value,
     description: productDescription.value,
-    transformedImage: transformedImage,
     image: productImageFile,
+    transformedImage: transformedImage,
   };
 
-  return console.log(newProduct);
   try {
     const { data } = await axios.post("/admin/add-product", newProduct, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -128,7 +127,6 @@ const resetForm = () => {
   saveFormValidity();
   resetFormReply();
 };
-
 
 const formatResponseError = (error, callback) => {
   const errorMessage = error.response.data.message || error.message;

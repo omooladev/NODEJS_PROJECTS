@@ -28,8 +28,14 @@
                 </div>
                  <div class="form_control image_control">
                     <div class="control">
-                        <label for="product_image">Image</label>
-                        <input type="file" id="product_image" name="product_image" accept="image/"/>
+                        <%if(isEditing){%>
+                             <label>Image</label>
+                            <label for="product_image" class="change_image_label">change image</label>
+                            <input type="file" id="product_image" name="product_image" accept="image/" style="display: none;"/>
+                        <%}else{%>
+                             <label for="product_image">Image</label>
+                            <input type="file" id="product_image" name="product_image" accept="image/" />
+                            <%}%>
                     </div>
                     <img src="<%=isEditing?product.imageUrl:""%>" alt="product image" class="preview_image <%=isEditing?"edit":"" %>"/>
                 </div>
