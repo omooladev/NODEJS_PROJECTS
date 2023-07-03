@@ -31,10 +31,17 @@
                         <label for="product_image">Image</label>
                         <input type="file" id="product_image" name="product_image" accept="image/"/>
                     </div>
-                    <img src="" alt="" class="preview_image"/>
+                    <img src="<%=isEditing?product.imageUrl:""%>" alt="product image" class="preview_image <%=isEditing?"edit":"" %>"/>
                 </div>
             </div>
-            <div class="form_actions"> <button type="submit" disabled="true">Add Product</button></div>
+            <div class="form_actions"> 
+                <%if(isEditing){%>
+                    <button type="submit">Edit Product</button>
+                <%}else{%>
+                    <button type="submit" disabled>Add Product</button>
+                <%}%>
+                
+            </div>
         </form>
     </main>
 </body>
