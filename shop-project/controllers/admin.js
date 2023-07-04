@@ -30,6 +30,27 @@ const getAllProducts = (req, res) => {
   });
 };
 
+const editProduct = (req, res) => {
+  const { productId } = req.params;
+  const { name, price, description, transformedImage: imageUrl } = req.body;
+  const { image } = req.files || "";
+
+  if (!name || !price || !description || !imageUrl) {
+    return res.status(400).json({ message: "Please provide values for all the fields" });
+  }
+
+  if (description.trim().length > 500) {
+    return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
+  }
+  const product = { name, price, description, imageUrl };
+  Product.updateById(productId, product, ({ success, message }) => {
+    if (success === true) {
+      return res.status(201).json({ message });
+    }
+    return res.status(400).json({ message });
+  });
+};
+
 const deleteProduct = (req, res) => {
   //----------> get product id
   const { productId } = req.params;
@@ -54,6 +75,9 @@ const viewAddProductPage = (req, res) => {
 const viewEditProductPage = (req, res) => {
   const { productId } = req.params;
   Product.findById(productId, (product) => {
+    if (!product) {
+      res.redirect("/admin/products");
+    }
     res.render("admin/product-management", {
       product,
       pageTitle: "Edit Product",
@@ -67,5 +91,6 @@ module.exports = {
   viewEditProductPage,
   addProductToList,
   getAllProducts,
+  editProduct,
   deleteProduct,
 };

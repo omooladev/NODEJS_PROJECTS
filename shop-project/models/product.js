@@ -46,7 +46,23 @@ module.exports = class Product {
       return callback(products);
     });
   }
+  static updateById(productId, editedProduct, callback) {
+    //----------> get all products
+    getAllProducts((products) => {
+      //----------> filter the products by getting the product whose id matches the productId
+      const productIndex = products.findIndex((product) => productId === product.id.toString());
+      products[productIndex] = { id: productId, ...editedProduct };
 
+      //----------> write the filtered products to the products.json file
+      fs.writeFile(pathToProductsList, JSON.stringify(products), (error, fileContent) => {
+        if (!error) {
+          //----------> if no error is found, then return the callback
+          return callback({ success: true, message: "Product has been edited successfully" });
+        }
+        return callback({ success: false, message: "An error has occurred" });
+      });
+    });
+  }
   static deleteProduct(productId, callback) {
     //----------> get all products
     getAllProducts((products) => {

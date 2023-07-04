@@ -13,7 +13,7 @@ const productImagePreview = document.querySelector(".preview_image");
 
 //----------> declare variables
 let productImageFile;
-let transformedImage;
+let transformedImage = productImagePreview.src || "";
 
 //----------> default validity
 let productFormInputIsValid = {
@@ -80,22 +80,30 @@ const submitFormHandler = async (event) => {
     description: productDescription.value,
     transformedImage: transformedImage,
   };
+
   const isEditing = productForm.className.includes("isEditing");
+  const pageLocation = isEditing && window.location.href.split("/");
+  const productId = pageLocation && pageLocation[pageLocation.length - 1];
+
   try {
     const { data } = await axios.post(
-      `/admin${isEditing ? "/edit-product" : "/add-product"}`,
+      `/admin${isEditing ? `/edit-product/${productId}` : "/add-product"}`,
       newProduct,
       {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
+
     if (data) {
       setFormReply({
         message: isEditing ? "Product edited successfully" : "Product item added successfully",
         type: "success",
       });
       setTimeout(() => {
-        return resetForm();
+        resetForm();
+        if (data.message === "Product has been edited successfully") {
+          window.location.href = "/admin/products";
+        }
       }, 2000);
     }
   } catch (error) {

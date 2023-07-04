@@ -37,7 +37,12 @@
                             <input type="file" id="product_image" name="product_image" accept="image/" />
                             <%}%>
                     </div>
-                    <img src="<%=isEditing?product.imageUrl:""%>" alt="product image" class="preview_image <%=isEditing?"edit":"" %>"/>
+                    <%if(isEditing){%>
+                           <img src="<%=product.imageUrl%>" alt="product image" class="preview_image edit"/>
+                        <%}else{%>
+                             <img alt="product image" class="preview_image"/>
+                            <%}%>
+                    
                 </div>
             </div>
             <div class="form_actions"> 
