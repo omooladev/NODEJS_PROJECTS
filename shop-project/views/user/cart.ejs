@@ -1,29 +1,46 @@
 <%-include("../includes/head")%>
- <link rel="stylesheet" href="/css/cart.css" />
- <script src="/js/script.js" defer></script>
- <script src="/js/cart.js" defer></script>
+<link rel="stylesheet" href="/css/cart.css" />
+<script src="/js/script.js" defer></script>
+<script src="/js/cart.js" defer></script>
 
 <body>
-    <%-include("../includes/navigation")%>
-    <main class="main">
-        <%if(cartContents.length===0){%>
-            <h2>There are no products in your cart</h2>
-            <p class="no_cart">Your cart is empty. <a href="/">Click here</a> to go back to the shop page and add some products.</p>
-        <%}else{%>
-            <section class="cart_section">
-            <div class="shopping_cart">
-                <h2>Your Shopping Cart</h2>
-                <hr/>
-            </div>
-            <div class="cart_total">
-                <h2>Cart Total</h2>
-                <hr/>
-            </div>
-        </section>
-            
-           
-        
+  <%-include("../includes/navigation")%>
+  <main class="main">
+    <%if(cartContents.length===0){%>
+    <h2>There are no products in your cart</h2>
+    <p class="no_cart">
+      Your cart is empty. <a href="/">Click here</a> to go back to the shop page and add some
+      products.
+    </p>
+    <%}else{%>
+    <section class="cart_section">
+      <section class="shopping_cart">
+        <h2>Your Shopping Cart</h2>
+        <hr />
+      </section>
+      <section class="cart_total">
+        <h2>Cart Total</h2>
+        <div class="cart_total_details">
+          <div class="cart_total_detail">
+            <h3>Subtotal :</h3>
+            <h4>$<%=cartContents.totalAmount%></h4>
+          </div>
+          <div class="cart_total_detail">
+            <h3>Shipping :</h3>
+            <h4>Free</h4>
+          </div>
+        </div>
+        <hr />
+        <div class="cart_total_amount">
+          <h3>Total :</h3>
+          <h4>$ <%=cartContents.totalAmount%></h4>
+        </div>
+        <div class="cart_total_actions">
+          <button>Proceed to Checkout</button>
+        </div>
+      </section>
+    </section>
+
     <%}%>
-    </main>
-   
+  </main>
 </body>
