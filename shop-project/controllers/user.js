@@ -18,4 +18,10 @@ const getAllCartItems = (req, res) => {
     res.status(200).json({ cartContents });
   });
 };
-module.exports = { getAllProducts, addProductToCart, getAllCartItems };
+
+const viewCartPage = (req, res) => {
+  Cart.getCartContents((cartContents) => {
+    console.log(cartContents);
+  });
+};
+module.exports = { getAllProducts, addProductToCart, getAllCartItems, viewCartPage };
