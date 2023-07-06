@@ -1,6 +1,7 @@
 <%-include("../includes/head")%>
  <link rel="stylesheet" href="/css/product.css" />
  <script src="/js/script.js" defer></script>
+ <script src="/js/cart.js" defer></script>
 </head>
 <body>
     <%-include("../includes/navigation")%>
@@ -21,12 +22,10 @@
                                 <%}else{%>
                                     <h4 class="product_description" ><%=product.description%></h4>
                                 <%}%>
-                                
-                            
                         <h4 class="product_price">$<%=product.price%></h3>
                         </div>
                         <div class="product_actions">
-                            <button type="button">Add to cart</button>
+                            <button type="button" class="add_to_cart" value="<%=product.id%>" >Add to cart</button>
                         </div>
                     </div>
                 <%})%>
