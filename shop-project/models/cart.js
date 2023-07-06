@@ -47,8 +47,9 @@ module.exports = class Cart {
             totalAmount,
           };
         } else {
-          let cartItemIndex = cartItems.findIndex((cartItem) => cartItem.id === productId);
+          let cartItemIndex = cartItems.findIndex((cartItem) => cartItem.id === newProduct.id);
           let cartItem = cartItems[cartItemIndex];
+
           if (cartItem) {
             let { price, quantity } = cartItem;
             //----------> the former total amount plus the price again
@@ -56,29 +57,22 @@ module.exports = class Cart {
             quantity += 1;
             cartItem = { ...cartItem, quantity, price };
             //----------> configure the updated cart
-            console.log(cartItem);
+
             cartItems[cartItemIndex] = cartItem;
             updatedCart = {
               cartItems: [...cartItems],
               numberOfCartItems,
               totalAmount,
             };
+          } else {
+            numberOfCartItems += 1;
+            totalAmount = totalAmount + +newProduct.price;
+            updatedCart = {
+              cartItems: [...cartItems, { ...newProduct, quantity: 1 }],
+              numberOfCartItems,
+              totalAmount,
+            };
           }
-
-          // const updatedCart = cartItems.forEach((cartItem) => {
-          //   const cartItemId = cartItem.id;
-          //   let { price, quantity } = cartItem;
-
-          //   if (productId === cartItemId) {
-          //     //----------> increase cart quantity by 1
-          //     quantity += 1;
-          //     price *= quantity;
-          //     //----------> return the updated item
-          //     return { ...cartItem, quantity, price };
-          //   }
-          //   return console.log(productId);
-          // });
-          // return console.log(updatedCart)
         }
         fs.writeFile(pathToCart, JSON.stringify([updatedCart]), (error, fileContent) => {
           if (!error) {
