@@ -21,7 +21,7 @@ const getAllCartItems = (req, res) => {
 
 const viewCartPage = (req, res) => {
   Cart.getCartContents((cartContents) => {
-    console.log(cartContents);
+    res.render("user/cart.ejs", { cartContents, pageTitle: "Cart", path: "/cart", products: [] });
   });
 };
 module.exports = { getAllProducts, addProductToCart, getAllCartItems, viewCartPage };

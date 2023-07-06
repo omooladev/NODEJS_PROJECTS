@@ -1,0 +1,7 @@
+.no_cart{
+    text-align: center;
+    font-size:1.2rem
+}
+.no_cart a{
+    color: orangered;
+}
