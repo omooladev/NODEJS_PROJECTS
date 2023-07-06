@@ -5,3 +5,22 @@
 .no_cart a{
     color: orangered;
 }
+
+.cart_section{
+    display:flex;
+    justify-content: space-between;
+}
+
+.cart_section .shopping_cart{
+    width:65%;
+    margin:0.5rem 0;
+}
+.cart_section .cart_total{
+    width:30%;
+    margin:0.5rem 0;
+
+}
+.cart_section .shopping_cart h2,.cart_section .cart_total h2{
+  text-align: left;
+  padding:0.5rem;
+}

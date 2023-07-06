@@ -1,5 +1,5 @@
 <%-include("../includes/head")%>
-  <link rel="stylesheet" href="/css/cart.css" />
+ <link rel="stylesheet" href="/css/cart.css" />
  <script src="/js/script.js" defer></script>
  <script src="/js/cart.js" defer></script>
 
@@ -10,19 +10,19 @@
             <h2>There are no products in your cart</h2>
             <p class="no_cart">Your cart is empty. <a href="/">Click here</a> to go back to the shop page and add some products.</p>
         <%}else{%>
+            <section class="cart_section">
             <div class="shopping_cart">
                 <h2>Your Shopping Cart</h2>
+                <hr/>
             </div>
             <div class="cart_total">
                 <h2>Cart Total</h2>
+                <hr/>
             </div>
-            <h2>Products Available in store</h2>
-            <div class="products">
-                 
-                <%products.forEach(product=>{%>
-                    
-                <%})%>
-            </div>
+        </section>
+            
+           
+        
     <%}%>
     </main>
    
