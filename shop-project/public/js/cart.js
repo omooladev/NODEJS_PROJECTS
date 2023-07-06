@@ -8,8 +8,9 @@ const addProductToCartHandler = async (event) => {
   //send a request to add product to cart
   try {
     const {
-      data: { totalCart },
+      data: { cartContents },
     } = await axios.post(`/cart/add/${productId}`);
+    numberOfCartItems.innerHTML = cartContents.numberOfCartItems;
   } catch (error) {
     console.log(error);
   }
@@ -21,16 +22,16 @@ addToCartButton.forEach((button) => {
 });
 
 //---> get total number of cart items
-const getCart = async () => {
+const getCartContents = async () => {
   try {
     const {
-      data: { cart },
+      data: { cartContents },
     } = await axios.get(`/cart/items`);
 
-    numberOfCartItems.innerHTML = cart[0].numberOfCartItems;
+    numberOfCartItems.innerHTML = cartContents.numberOfCartItems;
   } catch (error) {
     console.log(error);
   }
 };
 
-getCart();
+getCartContents();

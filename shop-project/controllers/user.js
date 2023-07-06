@@ -8,12 +8,14 @@ const getAllProducts = (req, res) => {
 
 const addProductToCart = (req, res) => {
   const { productId } = req.params;
-  Cart.addToCart(productId, () => {});
+  Cart.addToCart(productId, (cartContents) => {
+    res.status(200).json({ cartContents });
+  });
 };
 
 const getAllCartItems = (req, res) => {
-  Cart.getAllItems((cart) => {
-    res.status(200).json({ cart });
+  Cart.getCartContents((cartContents) => {
+    res.status(200).json({ cartContents });
   });
 };
 module.exports = { getAllProducts, addProductToCart, getAllCartItems };
