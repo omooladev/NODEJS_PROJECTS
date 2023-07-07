@@ -82,6 +82,66 @@ module.exports = class Cart {
       });
     });
   }
+  static decreaseCartItemQuantity(cartItemId, callback) {
+    getCartContents((cartContents) => {
+      let updatedCart;
+      let cartItems = cartContents.cartItems;
+      let totalAmount = cartContents.totalAmount;
+      let numberOfCartItems = cartContents.numberOfCartItems;
+      //----------> find the cart contents whose id matches the cartId
+      const cartItemIndex = cartItems.findIndex(
+        (cartItem) => cartItemId === cartItem.id.toString()
+      );
+      let cartItem = cartItems[cartItemIndex];
+      if (cartItem.quantity === 1) {
+        return callback();
+      }
+      cartItem.quantity -= 1;
+      totalAmount = totalAmount - +cartItem.price;
+
+      cartItems[cartItemIndex] = cartItem;
+
+      updatedCart = {
+        cartItems,
+        numberOfCartItems,
+        totalAmount,
+      };
+      fs.writeFile(pathToCart, JSON.stringify([updatedCart]), (error, fileContent) => {
+        if (!error) {
+          callback();
+        }
+      });
+    });
+  }
+  static increaseCartItemQuantity(cartItemId, callback) {
+    //----------> get all products
+    getCartContents((cartContents) => {
+      let updatedCart;
+      let cartItems = cartContents.cartItems;
+      let totalAmount = cartContents.totalAmount;
+      let numberOfCartItems = cartContents.numberOfCartItems;
+      //----------> find the cart contents whose id matches the cartId
+      const cartItemIndex = cartItems.findIndex(
+        (cartItem) => cartItemId === cartItem.id.toString()
+      );
+      let cartItem = cartItems[cartItemIndex];
+      cartItem.quantity += 1;
+      totalAmount = totalAmount + +cartItem.price;
+
+      cartItems[cartItemIndex] = cartItem;
+
+      updatedCart = {
+        cartItems,
+        numberOfCartItems,
+        totalAmount,
+      };
+      fs.writeFile(pathToCart, JSON.stringify([updatedCart]), (error, fileContent) => {
+        if (!error) {
+          callback();
+        }
+      });
+    });
+  }
   static deleteCartItem(cartItemId, callback) {
     //----------> get all products
     getCartContents((cartContents) => {

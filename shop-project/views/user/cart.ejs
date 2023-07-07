@@ -26,9 +26,18 @@
             <h3 class="cart_item_name"><%=cartItem.name%></h3>
             <h4 class="cart_item_price">$<%=cartItem.price%></h4>
             <div class="cart_item_quantity">
-             <button class="control">-</button>
+              <form method="POST" action="/cart/decrease/<%=cartItem.id%>">
+                <%if(cartItem.quantity===1){%>
+                <button class="control" disabled>-</button>
+                <%}else{%>
+                <button class="control">-</button>
+                <%}%>
+              </form>
+
               <h4><%=cartItem.quantity%></h4>
-             <button class="control">+</button>
+              <form method="POST" action="/cart/increase/<%=cartItem.id%>">
+                <button class="control" type="submit">+</button>
+              </form>
             </div>
 
             <form method="POST" action="/cart/remove/<%=cartItem.id%>">

@@ -73,24 +73,38 @@
 .cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity {
   display: flex;
   align-items: center;
-  padding: 0.5rem 0;
+  justify-content: center;
   max-width: 7rem;
   height: auto;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity h4 {
   outline: 1px solid #ccc;
   padding: 0rem 0.8rem;
   font-size: 1.1rem;
   text-align: center;
+  width: 33%;
 }
-.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity .control {
-  padding: 0rem;
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity form {
+  width: 33%;
+  height: auto;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity form .control {
   font-size: 1.2rem;
   font-weight: bold;
   outline: 1px solid #ccc;
-  padding: 0.15rem 0.8rem;
+  padding: 0.13rem 0.8rem;
   background-color: transparent;
+  width: 100%;
+}
+.cart_section
+  .shopping_cart
+  .cart_item
+  .cart_item_detail
+  .cart_item_quantity
+  form
+  .control:disabled {
+  cursor: not-allowed;
 }
 
 .cart_section .shopping_cart .cart_item .cart_item_detail button {
