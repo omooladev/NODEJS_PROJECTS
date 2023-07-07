@@ -75,13 +75,24 @@
   align-items: center;
   padding: 0.5rem 0;
   max-width: 7rem;
+  height: auto;
+  /* overflow: hidden; */
 }
 .cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity h4 {
-  cursor: pointer;
   outline: 1px solid #ccc;
   padding: 0rem 0.8rem;
   font-size: 1.1rem;
+  text-align: center;
 }
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity .control {
+  padding: 0rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: 1px solid #ccc;
+  padding: 0.15rem 0.8rem;
+  background-color: transparent;
+}
+
 .cart_section .shopping_cart .cart_item .cart_item_detail button {
   margin: 1rem 0;
   width: 7rem;

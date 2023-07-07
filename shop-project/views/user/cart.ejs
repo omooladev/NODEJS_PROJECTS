@@ -26,9 +26,9 @@
             <h3 class="cart_item_name"><%=cartItem.name%></h3>
             <h4 class="cart_item_price">$<%=cartItem.price%></h4>
             <div class="cart_item_quantity">
-              <h4>-</h4>
+             <button class="control">-</button>
               <h4><%=cartItem.quantity%></h4>
-              <h4>+</h4>
+             <button class="control">+</button>
             </div>
 
             <form method="POST" action="/cart/remove/<%=cartItem.id%>">
