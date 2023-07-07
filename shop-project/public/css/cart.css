@@ -1,3 +1,18 @@
+.btn1 {
+  background-color: orangered;
+  padding: 0.6rem 0.6rem;
+  border-radius: 0.2rem;
+  color: white;
+}
+.btn1:hover {
+  background-color: rgba(255, 69, 0, 0.9);
+  color: white;
+}
+.btn1:disabled {
+  cursor: not-allowed;
+  background-color: rgba(63, 21, 5, 0.9);
+  color: rgb(155, 151, 151);
+}
 .no_cart {
   text-align: center;
   font-size: 1.2rem;
@@ -19,14 +34,61 @@
   width: 65%;
   margin: 0.5rem 0;
 }
-.cart_section .cart_total {
-  width: 30%;
-  margin: 0.5rem 0;
-}
+
 .cart_section .shopping_cart h2,
 .cart_section .cart_total h2 {
   text-align: left;
   padding: 0.5rem;
+}
+.cart_section .shopping_cart {
+}
+.cart_section .shopping_cart .cart_item {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+  align-items: center;
+}
+.cart_section .shopping_cart .cart_item .cart_item_image {
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+}
+.cart_section .shopping_cart .cart_item .cart_item_image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail {
+  padding: 0 1rem;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_name {
+  font-size: 1.3rem;
+  padding: 0.5rem 0;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_price {
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  max-width: 7rem;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail .cart_item_quantity h4 {
+  cursor: pointer;
+  outline: 1px solid #ccc;
+  padding: 0rem 0.8rem;
+  font-size: 1.1rem;
+}
+.cart_section .shopping_cart .cart_item .cart_item_detail button {
+  margin: 1rem 0;
+  width: 7rem;
+}
+.cart_section .cart_total {
+  width: 30%;
+  margin: 0.5rem 0;
 }
 .cart_section .cart_total .cart_total_details {
   padding: 0.5rem;
@@ -56,18 +118,5 @@
 }
 
 .cart_section .cart_total_actions button {
-  background-color: orangered;
-  padding: 0.6rem 0.6rem;
   width: 100%;
-  border-radius: 0.2rem;
-  color: white;
-}
-.cart_section .cart_total_actions button:hover {
-  background-color: rgba(255, 69, 0, 0.9);
-  color: white;
-}
-.cart_section .cart_total_actions button:disabled {
-  cursor: not-allowed;
-  background-color: rgba(63, 21, 5, 0.9);
-  color: rgb(155, 151, 151);
 }

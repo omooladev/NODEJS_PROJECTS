@@ -3,7 +3,7 @@ const addToCartButton = document.querySelectorAll(".add_to_cart");
 
 const addProductToCartHandler = async (event) => {
   //----------> here we save the id of the product in the product element
-const productId = event.target.value;
+  const productId = event.target.value;
 
   //send a request to add product to cart
   try {

@@ -82,4 +82,31 @@ module.exports = class Cart {
       });
     });
   }
+  static deleteCartItem(cartItemId, callback) {
+    //----------> get all products
+    getCartContents((cartContents) => {
+      let updatedCart;
+      let cartItems = cartContents.cartItems;
+      let totalAmount = cartContents.totalAmount;
+      let numberOfCartItems = cartContents.numberOfCartItems;
+      //----------> find the cart contents by removing the cart whose id matches the cartId
+      const filteredCartItems = cartItems.filter(
+        (cartItem) => cartItemId !== cartItem.id.toString()
+      );
+      const cartItem = cartItems.find((cartItem) => cartItemId === cartItem.id.toString());
+      cartItems = cartItems.indexOf(cartItem);
+      numberOfCartItems -= 1;
+      totalAmount = totalAmount - cartItem.price * cartItem.quantity;
+      updatedCart = {
+        cartItems: filteredCartItems,
+        numberOfCartItems,
+        totalAmount,
+      };
+      fs.writeFile(pathToCart, JSON.stringify([updatedCart]), (error, fileContent) => {
+        if (!error) {
+          callback();
+        }
+      });
+    });
+  }
 };

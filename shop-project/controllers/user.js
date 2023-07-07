@@ -6,6 +6,17 @@ const getAllProducts = (req, res) => {
   });
 };
 
+const removeCartItem = (req, res) => {
+  //----------> get product id
+  const { cartItemId } = req.params;
+
+  //----------> delete product
+  Cart.deleteCartItem(cartItemId, () => {
+    //---------->redirect to the cart page when a product is deleted
+    res.redirect("/cart");
+  });
+};
+
 const addProductToCart = (req, res) => {
   const { productId } = req.params;
   Cart.addToCart(productId, (cartContents) => {
@@ -21,7 +32,18 @@ const getAllCartItems = (req, res) => {
 
 const viewCartPage = (req, res) => {
   Cart.getCartContents((cartContents) => {
-    res.render("user/cart.ejs", { cartContents, pageTitle: "Cart", path: "/cart", products: [] });
+    res.render("user/cart.ejs", {
+      cartContents,
+      pageTitle: "Cart",
+      path: "/cart",
+      products: [],
+    });
   });
 };
-module.exports = { getAllProducts, addProductToCart, getAllCartItems, viewCartPage };
+module.exports = {
+  getAllProducts,
+  addProductToCart,
+  getAllCartItems,
+  viewCartPage,
+  removeCartItem,
+};

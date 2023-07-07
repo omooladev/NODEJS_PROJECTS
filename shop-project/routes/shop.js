@@ -5,6 +5,7 @@ const {
   addProductToCart,
   getAllCartItems,
   viewCartPage,
+  removeCartItem,
 } = require("../controllers/user");
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.get("/", getAllProducts);
 router.route("/cart").get(viewCartPage)
 router.route("/cart/add/:productId").post(addProductToCart);
 router.route("/cart/items").get(getAllCartItems);
+router.route("/cart/remove/:cartItemId").post(removeCartItem);
 
 module.exports = router;
