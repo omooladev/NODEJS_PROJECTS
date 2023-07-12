@@ -1,7 +1,9 @@
 //----------> import packages
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const fileUpload = require("express-fileupload");
+const { connectToDatabase } = require("./utils/database");
 const swaggerUI = require("swagger-ui-express");
 
 //----------> documentation
@@ -30,10 +32,17 @@ app.use("/api/docs", swaggerUI.setup(swaggerDocumentation));
 app.use("/admin", adminRouter);
 app.use("", shopRouter);
 
+//----------> Environment variables
+const { PORT = 5000, MONGO_URI } = process.env;
+
 //----------> Listen to the server
-const start = () => {
-  app.listen(5000, () => {
-    console.log("Server is listening at port 5000");
+const start = async () => {
+  //----------> connect to database
+  await connectToDatabase(MONGO_URI);
+
+  //----------> listen to server
+  app.listen(PORT, () => {
+    console.log(`Server is listening at port ${PORT}`);
   });
 };
 

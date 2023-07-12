@@ -1,17 +1,8 @@
-const fs = require("fs");
-const path = require("path");
+//----------> import modules
+const mongodb = require("mongodb");
+const { getDatabase } = require("../utils/database");
 
-const pathToProductsList = path.join(path.dirname(require.main.filename), "data", "products.json");
-
-const getAllProducts = (callback) => {
-  //? Read products from products json file
-  fs.readFile(pathToProductsList, (error, productsList) => {
-    if (!error) {
-      return callback(JSON.parse(productsList));
-    }
-    return callback([]);
-  });
-};
+const ObjectId = mongodb.ObjectId;
 
 module.exports = class Product {
   constructor(name, price, description, imageUrl) {
@@ -20,63 +11,25 @@ module.exports = class Product {
     this.description = description;
     this.imageUrl = imageUrl;
   }
-
-  save(callback) {
-    getAllProducts((oldProducts) => {
-      //?automatically add id to the new product
-      const newProduct = { id: Math.random(), ...this };
-      const updatedProducts = JSON.stringify([newProduct, ...oldProducts]);
-      fs.writeFile(pathToProductsList, updatedProducts, (error, products) => {
-        if (!error) {
-          return callback({ success: true, message: "Product has been created successfully" });
-        }
-        return callback({ success: false, message: "An error has occurred" });
-      });
-    });
+  //----------> save to database
+  async save() {
+    const database = getDatabase();
+    try {
+      const product = await database.collection("products").insertOne(this);
+      return { success: true, message: "product has been added successfully" };
+    } catch (error) {
+      return { success: false, message: error };
+    }
   }
 
-  static findById(productId, callback) {
-    getAllProducts((products) => {
-      const product = products.find((product) => product.id.toString() === productId);
-      return callback(product);
-    });
+  //---------->fetch all the products from the database
+  static fetchAll() {
+    const database = getDatabase();
+    return database.collection("products").find().toArray();
   }
-  static fetchAllProducts(callback) {
-    getAllProducts((products) => {
-      return callback(products);
-    });
-  }
-  static updateById(productId, editedProduct, callback) {
-    //----------> get all products
-    getAllProducts((products) => {
-      //----------> filter the products by getting the product whose id matches the productId
-      const productIndex = products.findIndex((product) => productId === product.id.toString());
-      products[productIndex] = { id: productId, ...editedProduct };
-
-      //----------> write the filtered products to the products.json file
-      fs.writeFile(pathToProductsList, JSON.stringify(products), (error, fileContent) => {
-        if (!error) {
-          //----------> if no error is found, then return the callback
-          return callback({ success: true, message: "Product has been edited successfully" });
-        }
-        return callback({ success: false, message: "An error has occurred" });
-      });
-    });
-  }
-  static deleteProduct(productId, callback) {
-    //----------> get all products
-    getAllProducts((products) => {
-      //----------> filter the products by removing the product whose id matches the productId
-      const filteredProducts = products.filter((product) => productId !== product.id.toString());
-
-      //----------> write the filtered products to the products.json file
-      fs.writeFile(pathToProductsList, JSON.stringify(filteredProducts), (error, fileContent) => {
-        if (!error) {
-          //----------> if no error is found, then return the callback
-          return callback();
-        }
-        console.log(error);
-      });
-    });
+  //---------->delete a product from the database
+  static delete(productId) {
+    const database = getDatabase();
+    return database.collection("products").deleteOne({ _id: new ObjectId(productId) });
   }
 };

@@ -84,7 +84,7 @@ const submitFormHandler = async (event) => {
   const isEditing = productForm.className.includes("isEditing");
   const pageLocation = isEditing && window.location.href.split("/");
   const productId = pageLocation && pageLocation[pageLocation.length - 1];
-
+  // resetForm();
   try {
     const { data } = await axios.post(
       `/admin${isEditing ? `/edit-product/${productId}` : "/add-product"}`,
