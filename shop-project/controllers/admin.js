@@ -20,16 +20,6 @@ const addProductToList = (req, res) => {
   });
 };
 
-const getAllProducts = (req, res) => {
-  Product.fetchAllProducts((products) => {
-    res.render("admin/products", {
-      products,
-      path: "/admin/products",
-      pageTitle: "Admin Products",
-    });
-  });
-};
-
 const editProduct = (req, res) => {
   const { productId } = req.params;
   const { name, price, description, transformedImage: imageUrl } = req.body;
@@ -86,11 +76,23 @@ const viewEditProductPage = (req, res) => {
     });
   });
 };
+
+//----------> view admin products page
+const viewAdminProductsPage = (req, res) => {
+  Product.fetchAllProducts((products) => {
+    res.render("admin/products", {
+      products,
+      path: "/admin/products",
+      pageTitle: "Admin Products",
+    });
+  });
+};
+
 module.exports = {
   viewAddProductPage,
   viewEditProductPage,
   addProductToList,
-  getAllProducts,
+  viewAdminProductsPage,
   editProduct,
   deleteProduct,
 };
