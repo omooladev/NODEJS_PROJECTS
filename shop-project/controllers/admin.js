@@ -1,19 +1,21 @@
+const productDetailsValidator = require("../lib/productDetailsValidator");
 const Product = require("../models/product");
 
-const addProductToList = (req, res) => {
+const addProductToList = async (req, res) => {
   const { name, price, description, transformedImage: imageUrl } = req.body;
   //const { image } = req.files || "";
 
-  if (!name || !price || !description || !imageUrl) {
-    return res.status(400).json({ message: "Please provide values for all the fields" });
-  }
-
-  if (description.trim().length > 500) {
-    return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
+  const { success, message } = await productDetailsValidator({
+    name,
+    price,
+    description,
+    imageUrl,
+  });
+  if (!success) {
+    return res.status(400).json({ message });
   }
   //----------> create a new product
   const product = new Product(name, price, description, imageUrl);
-
   //----------> save the product
   product
     .save()
@@ -28,25 +30,32 @@ const addProductToList = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-const editProduct = (req, res) => {
+const editProduct = async (req, res) => {
   const { productId } = req.params;
   const { name, price, description, transformedImage: imageUrl } = req.body;
-  const { image } = req.files || "";
+  //const { image } = req.files || "";
 
-  if (!name || !price || !description || !imageUrl) {
-    return res.status(400).json({ message: "Please provide values for all the fields" });
-  }
-
-  if (description.trim().length > 500) {
-    return res.status(400).json({ message: "Products description cannot exceed 500 characters" });
-  }
-  const product = { name, price, description, imageUrl };
-  Product.updateById(productId, product, ({ success, message }) => {
-    if (success === true) {
-      return res.status(201).json({ message });
-    }
-    return res.status(400).json({ message });
+  //----------> validate product details
+  const { success, message } = await productDetailsValidator({
+    name,
+    price,
+    description,
+    imageUrl,
   });
+  if (!success) {
+    return res.status(400).json({ message });
+  }
+  const product = new Product(name, price, description, imageUrl);
+  product
+    .updateById(productId)
+    .then((response) => {
+      const { success, message } = response;
+      if (success === true) {
+        return res.status(201).json({ message });
+      }
+      return res.status(400).json({ message });
+    })
+    .catch((error) => console.log(error));
 };
 
 const deleteProduct = (req, res) => {
@@ -71,9 +80,9 @@ const viewAddProductPage = (req, res) => {
 //----------> view edit product page
 const viewEditProductPage = (req, res) => {
   const { productId } = req.params;
-  Product.findById(productId, (product) => {
+  Product.findById(productId).then((product) => {
     if (!product) {
-      res.redirect("/admin/products");
+      return res.redirect("/admin/products");
     }
     res.render("admin/product-management", {
       product,

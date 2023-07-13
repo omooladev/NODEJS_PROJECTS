@@ -21,6 +21,26 @@ module.exports = class Product {
       return { success: false, message: error };
     }
   }
+  //----------> update a single product
+  updateById(productId) {
+    const database = getDatabase();
+    return database
+      .collection("products")
+      .updateOne({ _id: new ObjectId(productId) }, { $set: this })
+      .then((result) => {
+        return { success: true, message: "Product has been edited successfully" };
+      })
+      .catch((error) => console.log(error));
+  }
+  //----------> fetch a single product
+  static findById(productId) {
+    const database = getDatabase();
+    return database
+      .collection("products")
+      .findOne({ _id: new ObjectId(productId) })
+      .then((result) => result)
+      .catch((error) => console.log(error));
+  }
 
   //---------->fetch all the products from the database
   static fetchAll() {
