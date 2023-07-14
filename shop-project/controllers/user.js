@@ -1,9 +1,11 @@
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 const getAllProducts = (req, res) => {
-  Product.fetchAllProducts((products) => {
-    res.render("user/shop", { path: "/", pageTitle: "Shop", products });
-  });
+  Product.fetchAll()
+    .then((products) => {
+      res.render("user/shop", { path: "/", pageTitle: "Shop", products });
+    })
+    .catch((error) => console.log(error));
 };
 const viewCartPage = (req, res) => {
   Cart.getCartContents((cartContents) => {
@@ -29,9 +31,12 @@ const removeCartItem = (req, res) => {
 
 const addProductToCart = (req, res) => {
   const { productId } = req.params;
-  Cart.addToCart(productId, (cartContents) => {
-    res.status(200).json({ cartContents });
-  });
+  req.user
+    .addToCart(productId)
+    .then((cart) => {
+      res.status(200).json({ cart });
+    })
+    .catch((error) => console.log(error));
 };
 
 const getAllCartItems = (req, res) => {
