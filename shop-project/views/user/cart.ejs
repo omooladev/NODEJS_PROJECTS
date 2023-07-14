@@ -6,7 +6,7 @@
 <body>
   <%-include("../includes/navigation")%>
   <main class="main">
-    <%if(cartContents.cartItems.length===0){%>
+    <%if(cart.items.length===0){%>
     <h2>There are no products in your cart</h2>
     <p class="no_cart">
       Your cart is empty. <a href="/">Click here</a> to go back to the shop page and add some
@@ -17,7 +17,7 @@
       <section class="shopping_cart">
         <h2>Your Shopping Cart</h2>
         <hr />
-        <% cartContents.cartItems.forEach(cartItem=>{%>
+        <% cart.items.forEach(cartItem=>{%>
         <div class="cart_item">
           <div class="cart_item_image">
             <img src="<%=cartItem.imageUrl%>" />
@@ -35,12 +35,12 @@
               </form>
 
               <h4><%=cartItem.quantity%></h4>
-              <form method="POST" action="/cart/increase/<%=cartItem.id%>">
+              <form method="POST" action="/cart/increase/<%=cartItem._id%>">
                 <button class="control" type="submit">+</button>
               </form>
             </div>
 
-            <form method="POST" action="/cart/remove/<%=cartItem.id%>">
+            <form method="POST" action="/cart/remove/<%=cartItem._id%>">
               <button class="btn1">Remove</button>
             </form>
           </div>
@@ -53,7 +53,7 @@
         <div class="cart_total_details">
           <div class="cart_total_detail">
             <h3>Subtotal :</h3>
-            <h4>$<%=cartContents.totalAmount%></h4>
+            <h4>$<%=cart.totalAmount%></h4>
           </div>
           <div class="cart_total_detail">
             <h3>Shipping :</h3>
@@ -63,7 +63,7 @@
         <hr />
         <div class="cart_total_amount">
           <h3>Total :</h3>
-          <h4>$ <%=cartContents.totalAmount%></h4>
+          <h4>$ <%=cart.totalAmount%></h4>
         </div>
         <div class="cart_total_actions">
           <button class="btn1">Proceed to Checkout</button>

@@ -72,4 +72,31 @@ module.exports = class User {
       .then((result) => result.value.cart)
       .catch((error) => console.log(error));
   }
+
+  //----------> fetch cart
+  async fetchCart() {
+    const database = getDatabase();
+    //----------> get the user cart
+    let cart = this.cart;
+    //----------> get all the product id in the cart items
+    const productIds = this.cart.items.map((item) => item.productId);
+    //----------> check and return the full product details of the item id found in the products collection
+    let cartItems = await database
+      .collection("products")
+      .find({ _id: { $in: productIds } })
+      .toArray();
+    //----------> map through the product details and add the quantity to it
+    cartItems = cartItems.map((cartItem) => {
+      return {
+        ...cartItem,
+        quantity: this.cart.items.find(
+          (item) => item.productId.toString() === cartItem._id.toString()
+        ).quantity,
+      };
+    });
+    //----------> get all key values in the user cart with the returned cart items details
+    cart = { ...cart, items: [...cartItems] };
+    return cart;
+  }
 };
+

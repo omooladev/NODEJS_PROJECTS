@@ -1,5 +1,6 @@
 const Cart = require("../models/cart");
 const Product = require("../models/product");
+const User = require("../models/user");
 const getAllProducts = (req, res) => {
   Product.fetchAll()
     .then((products) => {
@@ -8,14 +9,16 @@ const getAllProducts = (req, res) => {
     .catch((error) => console.log(error));
 };
 const viewCartPage = (req, res) => {
-  Cart.getCartContents((cartContents) => {
-    res.render("user/cart.ejs", {
-      cartContents,
-      pageTitle: "Cart",
-      path: "/cart",
-      products: [],
-    });
-  });
+  req.user.fetchCart()
+    .then((cart) =>
+      res.render("user/cart.ejs", {
+        cart,
+        pageTitle: "Cart",
+        path: "/cart",
+        products: [],
+      })
+    )
+    .catch((error) => console.log(error));
 };
 
 const removeCartItem = (req, res) => {
@@ -39,10 +42,11 @@ const addProductToCart = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-const getAllCartItems = (req, res) => {
-  Cart.getCartContents((cartContents) => {
-    res.status(200).json({ cartContents });
-  });
+const getAllCartItems = (req, res, next) => {
+  req.user
+    .fetchCart()
+    .then((cart) => res.status(200).json({ cart }))
+    .catch((error) => console.log(error));
 };
 
 const increaseCartItemQuantity = (req, res) => {
