@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { getDatabase } = require("../utils/database");
 
 const Product = require("./product");
@@ -98,5 +99,34 @@ module.exports = class User {
     cart = { ...cart, items: [...cartItems] };
     return cart;
   }
-};
+  //----------> delete cart item
+  async deleteCartItem(cartItemId) {
+    const database = getDatabase();
+    let cart;
+    let { items, numberOfCartItems, totalAmount } = this.cart;
 
+    //----------> find the price of the cart item from the product collection
+    let cartItem = await database.collection("products").findOne({ _id: new ObjectId(cartItemId) });
+
+    //----------> find quantity from the cart in the user collection
+    let quantity = items.find((item) => {
+      if (item.productId.toString() === cartItemId) {
+        return item;
+      }
+    }).quantity;
+
+    numberOfCartItems -= 1;
+    totalAmount = totalAmount - cartItem.price * quantity;
+    cart = {
+      items: items.filter((item) => item.productId.toString() !== cartItemId),
+      numberOfCartItems,
+      totalAmount,
+    };
+
+    return database
+      .collection("users")
+      .findOneAndUpdate({ _id: this._id }, { $set: { cart } })
+      .then((result) => result)
+      .catch((error) => console.log(error));
+  }
+};

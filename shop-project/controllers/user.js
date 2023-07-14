@@ -1,6 +1,5 @@
-const Cart = require("../models/cart");
 const Product = require("../models/product");
-const User = require("../models/user");
+
 const getAllProducts = (req, res) => {
   Product.fetchAll()
     .then((products) => {
@@ -9,7 +8,8 @@ const getAllProducts = (req, res) => {
     .catch((error) => console.log(error));
 };
 const viewCartPage = (req, res) => {
-  req.user.fetchCart()
+  req.user
+    .fetchCart()
     .then((cart) =>
       res.render("user/cart.ejs", {
         cart,
@@ -24,12 +24,13 @@ const viewCartPage = (req, res) => {
 const removeCartItem = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
-
-  //----------> delete product
-  Cart.deleteCartItem(cartItemId, () => {
-    //---------->redirect to the cart page when a product is deleted
-    res.redirect("/cart");
-  });
+  req.user
+    .deleteCartItem(cartItemId)
+    .then((result) => {
+      //---------->redirect to the cart page when a product is deleted
+      res.redirect("/cart");
+    })
+    .catch((error) => console.log(error));
 };
 
 const addProductToCart = (req, res) => {
@@ -53,20 +54,20 @@ const increaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
   //----------> delete product
-  Cart.increaseCartItemQuantity(cartItemId, () => {
-    //---------->redirect to the cart page when a product is deleted
-    res.redirect("/cart");
-  });
+  // Cart.increaseCartItemQuantity(cartItemId, () => {
+  //   //---------->redirect to the cart page when a product is deleted
+  //   res.redirect("/cart");
+  // });
 };
 const decreaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
 
   //----------> delete product
-  Cart.decreaseCartItemQuantity(cartItemId, () => {
-    //---------->redirect to the cart page when a product is deleted
-    res.redirect("/cart");
-  });
+  // Cart.decreaseCartItemQuantity(cartItemId, () => {
+  //   //---------->redirect to the cart page when a product is deleted
+  //   res.redirect("/cart");
+  // });
 };
 module.exports = {
   getAllProducts,
