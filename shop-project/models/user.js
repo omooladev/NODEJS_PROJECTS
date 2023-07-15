@@ -129,4 +129,70 @@ module.exports = class User {
       .then((result) => result)
       .catch((error) => console.log(error));
   }
+  //----------> increase quantity
+  async increaseCartItemQuantity(cartItemId) {
+    const database = getDatabase();
+    let cart;
+    let { items, numberOfCartItems, totalAmount } = this.cart;
+
+    //----------> find the  cart item from the product collection
+    let cartItem = await database.collection("products").findOne({ _id: new ObjectId(cartItemId) });
+
+    //----------> get the index of the cart item from the user cart
+    let itemIndex = items.findIndex((item) => item.productId.toString() === cartItemId);
+    let item = items[itemIndex];
+    //----------> increase the quantity by 1
+    item.quantity += 1;
+    items[itemIndex] = item;
+
+    //----------> add the item price to the total amount
+    totalAmount = totalAmount + cartItem.price;
+
+    cart = {
+      items,
+      numberOfCartItems,
+      totalAmount,
+    };
+
+    return database
+      .collection("users")
+      .findOneAndUpdate({ _id: this._id }, { $set: { cart } })
+      .then((result) => result)
+      .catch((error) => console.log(error));
+  }
+  //----------> decrease quantity
+  async decreaseCartItemQuantity(cartItemId) {
+    const database = getDatabase();
+    let cart;
+    let { items, numberOfCartItems, totalAmount } = this.cart;
+
+    //----------> find the  cart item from the product collection
+    let cartItem = await database.collection("products").findOne({ _id: new ObjectId(cartItemId) });
+
+    //----------> get the index of the cart item from the user cart
+    let itemIndex = items.findIndex((item) => item.productId.toString() === cartItemId);
+    let item = items[itemIndex];
+
+    if (item.quantity === 1) {
+      return;
+    }
+    //----------> decrease the quantity by 1
+    item.quantity -= 1;
+    items[itemIndex] = item;
+
+    //----------> add the item price to the total amount
+    totalAmount = totalAmount - cartItem.price;
+
+    cart = {
+      items,
+      numberOfCartItems,
+      totalAmount,
+    };
+
+    return database
+      .collection("users")
+      .findOneAndUpdate({ _id: this._id }, { $set: { cart } })
+      .then((result) => result)
+      .catch((error) => console.log(error));
+  }
 };

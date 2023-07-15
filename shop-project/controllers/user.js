@@ -54,20 +54,26 @@ const increaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
   //----------> delete product
-  // Cart.increaseCartItemQuantity(cartItemId, () => {
-  //   //---------->redirect to the cart page when a product is deleted
-  //   res.redirect("/cart");
-  // });
+
+  req.user
+    .increaseCartItemQuantity(cartItemId)
+    .then((result) => {
+      //---------->redirect to the cart page when a product is deleted
+      res.redirect("/cart");
+    })
+    .catch((error) => console.log(error));
 };
 const decreaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
 
-  //----------> delete product
-  // Cart.decreaseCartItemQuantity(cartItemId, () => {
-  //   //---------->redirect to the cart page when a product is deleted
-  //   res.redirect("/cart");
-  // });
+  req.user
+    .decreaseCartItemQuantity(cartItemId)
+    .then((result) => {
+      //---------->redirect to the cart page when a product is deleted
+      res.redirect("/cart");
+    })
+    .catch((error) => console.log(error));
 };
 module.exports = {
   getAllProducts,
