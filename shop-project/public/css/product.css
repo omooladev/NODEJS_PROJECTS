@@ -99,10 +99,16 @@
   text-transform: uppercase;
   transition: 0.3s ease;
 }
-.products .product_card .product_actions form button:hover,
 .products .product_card .product_actions button:hover {
   opacity: 0.9;
   transform: scale(0.95);
   transition: 0.2s ease all;
+  border-radius: 1.5rem;
+}
+
+.products .product_card .product_actions button:disabled {
+  cursor: not-allowed;
+  background-color: #dadada;
+  transform: scale(0.95);
   border-radius: 1.5rem;
 }

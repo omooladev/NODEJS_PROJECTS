@@ -121,3 +121,46 @@ button {
   text-align: center;
   padding: 1rem 0;
 }
+
+/* for notification */
+.notification {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 28rem;
+
+  border-radius: 0.3rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px #807979, 0 1px 2px #807979;
+  z-index: 999;
+}
+
+.notification.hide {
+  display: none;
+  /* animation: fadeOutAnimation ease-in-out 0.25s forwards; */
+}
+
+.notification .body {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}
+.notification .body a {
+  cursor: pointer;
+  color: orangered;
+}
+.notification i {
+  font-size: 24px;
+  margin: auto;
+  cursor: pointer;
+}
+.notification .body i {
+  cursor: default;
+  color: green;
+}
