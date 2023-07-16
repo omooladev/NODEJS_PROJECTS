@@ -14,16 +14,18 @@
                  
                 <%products.forEach(product=>{%>
                     <div class="product_card">
-                        <img alt="<%=product.name%>" src="<%=product.imageUrl%>"/>
-                            <div class="product_info">
-                            <h3 class="product_name" ><%=product.name%></h3>
-                            <%if(product.description.trim().length>100){%>
-                                    <h4 class="product_description" ><%=product.description.substring(0,97)%>...<a href="#">read more</a></h4>
-                                <%}else{%>
-                                    <h4 class="product_description" ><%=product.description%></h4>
-                                <%}%>
-                        <h4 class="product_price">$<%=product.price%></h3>
+                        <div class="product_image">
+                            <img alt="<%=product.name%>" src="<%=product.imageUrl%>"/>
                         </div>
+                            <div class="product_info">
+                                <h3 class="product_name"><%=product.name%></h3>
+                                <%if(product.description.trim().length>100){%>
+                                        <h4 class="product_description" ><%=product.description.substring(0,50)%>...<a href="#">read more</a></h4>
+                                    <%}else{%>
+                                        <h4 class="product_description" ><%=product.description%></h4>
+                                    <%}%>
+                                <h4 class="product_price">$<%=product.price%></h3>
+            </div>
                         <div class="product_actions">
                             <button type="button" class="add_to_cart" value="<%=product._id%>">Add to cart</button>
                         </div>

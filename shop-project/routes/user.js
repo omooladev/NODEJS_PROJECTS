@@ -1,7 +1,7 @@
 //? import statements
 const express = require("express");
 const {
-  getAllProducts,
+  viewShopPage,
   getAllCartItems,
   addProductToCart,
   viewCartPage,
@@ -12,8 +12,11 @@ const {
 
 const router = express.Router();
 
-//----------> routes to get all products in the store
-router.get("/", getAllProducts);
+//----------> route that redirects to the shop page
+router.get("/", (req, res) => res.redirect("/shop"));
+
+//----------> routes to view the shop page
+router.get("/shop", viewShopPage);
 
 //----------> route to view the cart page
 router.route("/cart").get(viewCartPage);

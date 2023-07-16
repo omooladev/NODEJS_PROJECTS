@@ -1,13 +1,14 @@
-const Product = require("../models/product");
+const User = require("../models/user");
 
-const getAllProducts = (req, res) => {
-  Product.fetchAll()
+//----------> view the shop page
+exports.viewShopPage = (req, res) => {
+  User.getAllProducts()
     .then((products) => {
       res.render("user/shop", { path: "/", pageTitle: "Shop", products });
     })
     .catch((error) => console.log(error));
 };
-const viewCartPage = (req, res) => {
+exports.viewCartPage = (req, res) => {
   req.user
     .fetchCart()
     .then((cart) =>
@@ -21,7 +22,7 @@ const viewCartPage = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-const removeCartItem = (req, res) => {
+exports.removeCartItem = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
   req.user
@@ -33,7 +34,7 @@ const removeCartItem = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-const addProductToCart = (req, res) => {
+exports.addProductToCart = (req, res) => {
   const { productId } = req.params;
   req.user
     .addToCart(productId)
@@ -43,14 +44,14 @@ const addProductToCart = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-const getAllCartItems = (req, res, next) => {
+exports.getAllCartItems = (req, res, next) => {
   req.user
     .fetchCart()
     .then((cart) => res.status(200).json({ cart }))
     .catch((error) => console.log(error));
 };
 
-const increaseCartItemQuantity = (req, res) => {
+exports.increaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
   //----------> delete product
@@ -63,7 +64,7 @@ const increaseCartItemQuantity = (req, res) => {
     })
     .catch((error) => console.log(error));
 };
-const decreaseCartItemQuantity = (req, res) => {
+exports.decreaseCartItemQuantity = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
 
@@ -74,13 +75,4 @@ const decreaseCartItemQuantity = (req, res) => {
       res.redirect("/cart");
     })
     .catch((error) => console.log(error));
-};
-module.exports = {
-  getAllProducts,
-  addProductToCart,
-  getAllCartItems,
-  viewCartPage,
-  removeCartItem,
-  increaseCartItemQuantity,
-  decreaseCartItemQuantity,
 };

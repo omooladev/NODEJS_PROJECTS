@@ -11,6 +11,13 @@ module.exports = class User {
     this.cart = cart; //{items:[{productId:1,quantity:1}],numberOfCartItems,totalAmount}
   }
 
+  //----------> get all the products in the store
+  static getAllProducts() {
+    return Product.fetchAll()
+      .then((products) => products)
+      .catch((error) => console.log(error));
+  }
+
   //----------> add product to cart
   async addToCart(productId) {
     const database = getDatabase();
