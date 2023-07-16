@@ -1,5 +1,6 @@
-//----------> import packages
 require("dotenv").config();
+//----------> import packages
+
 const path = require("path");
 const express = require("express");
 const fileUpload = require("express-fileupload");
@@ -37,7 +38,7 @@ app.use("/", (req, res, next) => {
     .collection("users")
     .findOne({ _id: new mongodb.ObjectId("64b04dcc3802e1e620d3a309") })
     .then(({ _id, name, email, cart }) => {
-      req.user = new User(_id, name, email,cart);
+      req.user = new User(_id, name, email, cart);
       next();
     })
     .catch((error) => console.log(error));
@@ -50,7 +51,7 @@ app.use("", userRouter);
 //----------> Environment variables
 const { PORT = 5000, MONGO_URI } = process.env;
 
-//----------> Listen to the server
+//---------->start server function
 const start = async () => {
   //----------> connect to database
   await connectToDatabase(MONGO_URI);
@@ -60,5 +61,5 @@ const start = async () => {
   });
 };
 
-//----------> Start server
+//---------->initialize the start server
 start();
