@@ -17,6 +17,7 @@ const addProductToCartHandler = async (event) => {
     numberOfCartItems.innerHTML = cart.numberOfCartItems;
     //---------->show notification
     notification.classList.remove("hide");
+
     //----------> clear timeout if it exists
     if (timeOut) {
       clearTimeout(timeOut);
@@ -33,7 +34,6 @@ const addProductToCartHandler = async (event) => {
 const closeNotificationHandler = () => {
   if (timeOut) {
     clearTimeout(timeOut);
-    console.log("cleared", timeOut);
   }
   notification.classList.add("hide");
 };
@@ -56,5 +56,7 @@ const getCartContents = async () => {
   }
 };
 
-closeNotification.onclick = (event) => closeNotificationHandler(event);
+if (closeNotification) {
+  closeNotification.onclick = (event) => closeNotificationHandler(event);
+}
 getCartContents();
