@@ -42,15 +42,16 @@ const editProduct = async (req, res) => {
   if (!success) {
     return res.status(400).json({ message });
   }
-  const product = new Product(name, price, description, imageUrl);
-  product
-    .updateById(productId)
-    .then((response) => {
-      const { success, message } = response;
-      if (success === true) {
-        return res.status(201).json({ message });
+
+  Product.findOneAndUpdate(
+    { _id: productId },
+    { name, price, description, imageUrl },
+    { new: true }
+  )
+    .then((product) => {
+      if (product) {
+        return res.status(201).json({ message: "Product edited successfully" });
       }
-      return res.status(400).json({ message });
     })
     .catch((error) => console.log(error));
 };
@@ -60,7 +61,7 @@ const deleteProduct = (req, res) => {
   const { productId } = req.params;
 
   //----------> delete product
-  Product.delete(productId)
+  Product.findOneAndRemove(productId)
     .then((result) => res.redirect("/admin/products"))
     .catch((error) => console.log(error));
 };
