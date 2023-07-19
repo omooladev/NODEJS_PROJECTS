@@ -1,0 +1,42 @@
+<%-include("../includes/head")%>
+ <link rel="stylesheet" href="/css/product.css" />
+ <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <%-include("../includes/navigation")%>
+    <main class="main">
+        <%if(products.length===0){%>
+            <h2>No Products found in store</h2>
+        <%}else{%>
+            <h2>Products that admins can manage</h2>
+            <div class="products">
+                <%products.forEach(product=>{%>
+                    <div class="product_card">
+                        <div class="product_image">
+                            <img alt="<%=product.name%>" src="<%=product.imageUrl%>"/>
+                        </div>
+                        <div class="product_info">
+                            <h3 class="product_name" ><%=product.name%></h3>
+                            <%if(product.description.trim().length>100){%>
+                                <h4 class="product_description" ><%=product.description.substring(0,50)%>...<a href="#">read more</a></h4>
+                                <%}else{%>
+                                <h4 class="product_description" ><%=product.description%></h4>
+                                <%}%>
+                            <h4 class="product_price">$<%=product.price%></h3>
+        </div>
+                        <div class="product_actions">
+                             <form method="GET" action="/admin/edit-product/<%=product._id%>">
+                                <button type="submit">Edit</button>
+                            </form>
+                            <form method="POST" action="/admin/products/delete/<%=product._id%>">
+                                <button type="submit">Delete</button>
+                            </form> 
+                        
+                        </div>
+                    </div>
+                <%})%>
+            </div>
+    <%}%>
+    </main>
+   
+</body>

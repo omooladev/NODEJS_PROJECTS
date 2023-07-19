@@ -14,9 +14,9 @@ const {
 const router = express.Router();
 
 router.route("/add-product").get(viewAddProductPage).post(addProductToList);
-// router.route("/products").get(viewAdminProductsPage);
-// router.route("/edit-product/:productId").get(viewEditProductPage);
-// router.route("/edit-product/:productId").post(editProduct);
-// router.route("/products/delete/:productId").post(deleteProduct);
+router.route("/products").get(viewAdminProductsPage);
+router.route("/edit-product/:productId").get(viewEditProductPage);
+router.route("/edit-product/:productId").post(editProduct);
+router.route("/products/delete/:productId").post(deleteProduct);
 
 module.exports = router;

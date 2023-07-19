@@ -1,0 +1,39 @@
+<%-include("../includes/head")%>
+<link rel="stylesheet" href="/css/form.css" />
+<script src="/js/form/form.js" defer></script>
+<script src="/js/form/product.js" defer></script>
+</head>
+<body>
+    <%-include("../includes/navigation")%>
+    <main class="main">
+        <form class="product_form">
+            <h2>Add a new product</h2>
+            <p class="form_reply"></p>
+            <div class="form_controls">
+                <div class="form_control">
+                    <label for="product_name">Name</label>
+                    <input type="text" id="product_name" placeholder="e.g Iphone 13" name="product_name"/>
+                </div>
+                 <div class="form_control">
+                    <label for="product_price">Price</label>
+                    <input type="number" id="product_price" placeholder="e.g 200" name="product_price" step="0.01"/>
+                    <p class="form_control_details">Default Currency is dollars ($)</p>
+                </div>
+                <div class="form_control">
+                    <label for="product_description">Description</label>
+                    <textarea id="product_description" placeholder="What should people know about this product?"></textarea>
+                    <p class="form_control_details product_description_length"><span id="product_description_length">0</span>/500</p>
+                </div>
+                 <div class="form_control image_control">
+                    <div class="control">
+                        <label for="product_image">Image</label>
+                        <input type="file" id="product_image" name="product_image" accept="image/"/>
+                    </div>
+                    <div class="image_container">
+                    </div>
+                </div>
+            </div>
+            <div class="form_actions"> <button type="submit" disabled="true">Add Product</button></div>
+        </form>
+    </main>
+</body>

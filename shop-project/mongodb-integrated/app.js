@@ -1,5 +1,6 @@
 require("dotenv").config();
 //----------> import packages
+
 const path = require("path");
 const express = require("express");
 const fileUpload = require("express-fileupload");
@@ -14,7 +15,6 @@ const swaggerDocumentation = require("./documentation/swaggerDocumentation");
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 const User = require("./models/user");
-
 
 //----------> Initialize application
 const app = express();
@@ -51,9 +51,9 @@ app.use("", userRouter);
 //----------> Environment variables
 const { PORT = 5000, MONGO_URI } = process.env;
 
+
 //---------->start server function
 const start = async () => {
-  
   //----------> connect to database
   await connectToDatabase(MONGO_URI);
   //----------> listen to server

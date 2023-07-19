@@ -1,0 +1,76 @@
+<%-include("../includes/head")%>
+<link rel="stylesheet" href="/css/cart.css" />
+<script src="/js/script.js" defer></script>
+<script src="/js/cart.js" defer></script>
+
+<body>
+  <%-include("../includes/navigation")%>
+  <main class="main">
+    <%if(cart.items.length===0){%>
+    <h2>There are no products in your cart</h2>
+    <p class="no_cart">
+      Your cart is empty. <a href="/">Click here</a> to go back to the shop page and add some
+      products.
+    </p>
+    <%}else{%>
+    <section class="cart_section">
+      <section class="shopping_cart">
+        <h2>Your Shopping Cart</h2>
+        <hr />
+        <% cart.items.forEach(cartItem=>{%>
+        <div class="cart_item">
+          <div class="cart_item_image">
+            <img src="<%=cartItem.imageUrl%>" />
+          </div>
+          <div class="cart_item_detail">
+            <h3 class="cart_item_name"><%=cartItem.name%></h3>
+            <h4 class="cart_item_price">$<%=cartItem.price%></h4>
+            <div class="cart_item_quantity">
+              <form method="POST" action="/cart/decrease/<%=cartItem._id%>">
+                <%if(cartItem.quantity===1){%>
+                <button class="control" disabled>-</button>
+                <%}else{%>
+                <button class="control">-</button>
+                <%}%>
+              </form>
+
+              <h4><%=cartItem.quantity%></h4>
+              <form method="POST" action="/cart/increase/<%=cartItem._id%>">
+                <button class="control" type="submit">+</button>
+              </form>
+            </div>
+
+            <form method="POST" action="/cart/remove/<%=cartItem._id%>">
+              <button class="btn1">Remove</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <%})%>
+      </section>
+      <section class="cart_total">
+        <h2>Cart Total</h2>
+        <div class="cart_total_details">
+          <div class="cart_total_detail">
+            <h3>Subtotal :</h3>
+            <h4>$<%=cart.totalAmount%></h4>
+          </div>
+          <div class="cart_total_detail">
+            <h3>Shipping :</h3>
+            <h4>Free</h4>
+          </div>
+        </div>
+        <hr />
+        <div class="cart_total_amount">
+          <h3>Total :</h3>
+          <h4>$ <%=cart.totalAmount%></h4>
+        </div>
+        <div class="cart_total_actions">
+          <button class="btn1">Proceed to Checkout</button>
+        </div>
+      </section>
+    </section>
+
+    <%}%>
+  </main>
+</body>
