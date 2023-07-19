@@ -92,7 +92,7 @@ const viewEditProductPage = (req, res) => {
 
 //----------> view admin products page
 const viewAdminProductsPage = (req, res) => {
-  Product.fetchAll()
+  Product.find()
     .then((products) => {
       res.render("admin/products", {
         products,
