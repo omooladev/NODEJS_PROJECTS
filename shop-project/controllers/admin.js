@@ -15,16 +15,13 @@ const addProductToList = async (req, res) => {
     return res.status(400).json({ message });
   }
   //----------> create a new product
-  const product = new Product(name, price, description, imageUrl);
+  const product = new Product({ name, price, description, imageUrl });
   //----------> save the product
   product
     .save()
-    .then((response) => {
-      const { success, message } = response;
-      if (success === true) {
-        res.status(201).json({ message });
-      } else {
-        res.status(400).json({ message });
+    .then((product) => {
+      if (product) {
+        return res.status(201).json({ message: "Product item added successfully" });
       }
     })
     .catch((error) => console.log(error));

@@ -5,8 +5,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const { connectToDatabase } = require("./utils/database");
 const swaggerUI = require("swagger-ui-express");
-const { getDatabase } = require("./utils/database");
-const mongodb = require("mongodb");
+
 //----------> documentation
 const swaggerDocumentation = require("./documentation/swaggerDocumentation");
 
@@ -32,17 +31,17 @@ app.use("/api/docs", swaggerUI.serve);
 app.use("/api/docs", swaggerUI.setup(swaggerDocumentation));
 
 //----------> This is just a route for getting a default user from database to work with
-app.use("/", (req, res, next) => {
-  const database = getDatabase();
-  database
-    .collection("users")
-    .findOne({ _id: new mongodb.ObjectId("64b04dcc3802e1e620d3a309") })
-    .then(({ _id, name, email, cart }) => {
-      req.user = new User(_id, name, email, cart);
-      next();
-    })
-    .catch((error) => console.log(error));
-});
+// app.use("/", (req, res, next) => {
+//   const database = getDatabase();
+//   database
+//     .collection("users")
+//     .findOne({ _id: new mongodb.ObjectId("64b04dcc3802e1e620d3a309") })
+//     .then(({ _id, name, email, cart }) => {
+//       req.user = new User(_id, name, email, cart);
+//       next();
+//     })
+//     .catch((error) => console.log(error));
+// });
 
 //----------> routes
 app.use("/admin", adminRouter);
