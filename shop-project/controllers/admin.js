@@ -15,7 +15,14 @@ const addProductToList = async (req, res) => {
     return res.status(400).json({ message });
   }
   //----------> create a new product
-  const product = new Product({ name, price, description, imageUrl });
+  const product = new Product({
+    name,
+    price,
+    description,
+    imageUrl,
+    userId: req.user,
+  });
+
   //----------> save the product
   product
     .save()
@@ -45,7 +52,7 @@ const editProduct = async (req, res) => {
 
   Product.findOneAndUpdate(
     { _id: productId },
-    { name, price, description, imageUrl },
+    { name, price, description, imageUrl, userId: req.user },
     { new: true }
   )
     .then((product) => {

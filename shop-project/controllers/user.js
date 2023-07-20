@@ -1,9 +1,12 @@
+const Product = require("../models/product");
 const User = require("../models/user");
 
 //----------> view the shop page
 exports.viewShopPage = (req, res) => {
-  User.getAllProducts()
+  //---------->testing the methods
+  Product.find().populate("userId").select("name description -price")
     .then((products) => {
+      console.log(products);
       res.render("user/shop", { path: "/", pageTitle: "Shop", products });
     })
     .catch((error) => console.log(error));
@@ -36,10 +39,15 @@ exports.removeCartItem = (req, res) => {
 
 exports.addProductToCart = (req, res) => {
   const { productId } = req.params;
-  req.user
-    .addToCart(productId)
-    .then((cart) => {
-      res.status(200).json({ cart });
+  Product.findById(productId)
+    .then((product) => {
+      console.log(product);
+      // req.user
+      //   .addToCart(productId)
+      //   .then((cart) => {
+      //     res.status(200).json({ cart });
+      //   })
+      //   .catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
 };

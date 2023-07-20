@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "user",
+    },
     name: {
       type: String,
       required: [true, "Please provide product name"],
@@ -16,7 +20,7 @@ const productSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: [true, "Please procide product image"],
+      required: [true, "Please provide product image"],
     },
   },
   { timestamps: true }
