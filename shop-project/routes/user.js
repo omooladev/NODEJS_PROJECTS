@@ -24,8 +24,8 @@ router.get("/shop", viewShopPage);
 //----------> route to add product to cart which contains the product name as a uri parameter
 router.route("/cart/add/:productId").post(addProductToCart);
 
-// //----------> route to get all the cart items
-// router.route("/cart/items").get(getAllCartItems);
+//----------> route to get all the cart items
+router.route("/cart/items").get(getAllCartItems);
 
 // //----------> route to decrease product quantity in the cart
 // router.route("/cart/decrease/:cartItemId").post(decreaseCartItemQuantity);

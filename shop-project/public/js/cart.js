@@ -12,10 +12,14 @@ const addProductToCartHandler = async (event) => {
 
   try {
     const {
-      data: { cart },
+      data: {
+        cart: { cart },
+      },
     } = await axios.post(`/cart/add/${productId}`);
-    numberOfCartItems.innerHTML = cart.numberOfCartItems;
+    console.log(cart);
+    numberOfCartItems.innerHTML = cart.items.length;
     //---------->show notification
+
     notification.classList.remove("hide");
 
     //----------> clear timeout if it exists
@@ -45,14 +49,14 @@ addToCartButton.forEach((button) => {
 
 //---> get total number of cart items
 const getCartContents = async () => {
-
   try {
     const {
-      data: { cart },
+      data: {
+        cart: { cart },
+      },
     } = await axios.get(`/cart/items`);
 
-    numberOfCartItems.innerHTML = cart.numberOfCartItems;
-    
+    numberOfCartItems.innerHTML = cart.items.length;
   } catch (error) {
     console.log(error);
   }
