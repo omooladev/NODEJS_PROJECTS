@@ -12,15 +12,21 @@ exports.viewShopPage = (req, res) => {
 };
 exports.viewCartPage = (req, res) => {
   req.user
-    .fetchCart()
-    .then((cart) =>
+    .populate("cart.items.productId")
+    .then((user) => {
+      const items = user.cart.items.map((item) => {
+        return { ...item.productId._doc, quantity: item.quantity };
+      });
+
+      const totalAmount = user.cart.totalAmount;
+      const cart = { items, totalAmount };
       res.render("user/cart.ejs", {
         cart,
         pageTitle: "Cart",
         path: "/cart",
         products: [],
-      })
-    )
+      });
+    })
     .catch((error) => console.log(error));
 };
 

@@ -33,7 +33,7 @@ router.route("/cart/items").get(getAllCartItems);
 // //----------> route to increase product quantity in the cart
 // router.route("/cart/increase/:cartItemId").post(increaseCartItemQuantity);
 
-// //----------> route to remove product from the cart
-// router.route("/cart/remove/:cartItemId").post(removeCartItem);
+//----------> route to remove product from the cart
+router.route("/cart/remove/:cartItemId").post(removeCartItem);
 
 module.exports = router;
