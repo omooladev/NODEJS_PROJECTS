@@ -18,8 +18,8 @@ router.get("/", (req, res) => res.redirect("/shop"));
 //----------> routes to view the shop page
 router.get("/shop", viewShopPage);
 
-// //----------> route to view the cart page
-// router.route("/cart").get(viewCartPage);
+//----------> route to view the cart page
+router.route("/cart").get(viewCartPage);
 
 //----------> route to add product to cart which contains the product name as a uri parameter
 router.route("/cart/add/:productId").post(addProductToCart);

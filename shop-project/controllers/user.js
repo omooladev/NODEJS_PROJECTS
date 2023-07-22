@@ -43,7 +43,7 @@ exports.addProductToCart = (req, res) => {
       req.user
         .addToCart(product)
         .then((cart) => {
-          res.status(200).json({ cart});
+          res.status(200).json({ cart });
         })
         .catch((error) => console.log(error));
     })
@@ -51,15 +51,12 @@ exports.addProductToCart = (req, res) => {
 };
 
 exports.getAllCartItems = (req, res, next) => {
-  next();
-  // req.user
-  //   .populate("cart.items.productId")
-  //   .execPopulate()
-  //   .then((cart) => {
-  //     return console.log(cart);
-  //     res.status(200).json({ cart });
-  //   })
-  //   .catch((error) => console.log(error));
+  req.user
+    .populate()
+    .then((user) => {
+      res.status(200).json({ cart: user.cart });
+    })
+    .catch((error) => console.log(error));
 };
 
 exports.increaseCartItemQuantity = (req, res) => {

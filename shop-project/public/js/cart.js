@@ -51,9 +51,7 @@ addToCartButton.forEach((button) => {
 const getCartContents = async () => {
   try {
     const {
-      data: {
-        cart: { cart },
-      },
+      data: { cart },
     } = await axios.get(`/cart/items`);
 
     numberOfCartItems.innerHTML = cart.items.length;
