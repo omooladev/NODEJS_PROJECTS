@@ -34,7 +34,7 @@ exports.removeCartItem = (req, res) => {
   //----------> get product id
   const { cartItemId } = req.params;
   req.user
-    .deleteCartItem(cartItemId)
+    .removeCartItem(cartItemId)
     .then((result) => {
       //---------->redirect to the cart page when a product is deleted
       res.redirect("/cart");

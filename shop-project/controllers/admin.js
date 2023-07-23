@@ -66,9 +66,8 @@ const editProduct = async (req, res) => {
 const deleteProduct = (req, res) => {
   //----------> get product id
   const { productId } = req.params;
-
   //----------> delete product
-  Product.findOneAndRemove(productId)
+  Product.findOneAndRemove({ _id: productId })
     .then((result) => res.redirect("/admin/products"))
     .catch((error) => console.log(error));
 };

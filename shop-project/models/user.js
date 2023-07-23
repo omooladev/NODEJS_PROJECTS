@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Product = require("./product");
 
 const userSchema = new mongoose.Schema(
   {
@@ -50,6 +51,29 @@ userSchema.methods.addToCart = function (product) {
       this.cart = { items: this.cart.items, totalAmount };
     }
   }
+  return this.save();
+};
+
+userSchema.methods.removeCartItem = async function (productId) {
+  //----------> find cart item
+  const cartItem = await Product.findById(productId);
+
+  //----------> get cart item quantity
+  const cartItemQuantity = this.cart.items.find(
+    (item) => item.productId.toString() == productId.toString()
+  ).quantity;
+  //----------> filter the cart items
+  let filteredCartItems = this.cart.items.filter(
+    (item) => item.productId.toString() != productId.toString()
+  );
+
+  //----------> update the cart
+  this.cart = {
+    items: filteredCartItems,
+    totalAmount: this.cart.totalAmount - cartItemQuantity * cartItem.price,
+  };
+
+  //----------> save document
   return this.save();
 };
 
