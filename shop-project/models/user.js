@@ -77,4 +77,25 @@ userSchema.methods.removeCartItem = async function (productId) {
   return this.save();
 };
 
+userSchema.methods.handleCartQuantityChange = async function (cartItemId, action) {
+  //----------> find the product
+  const product = await Product.findById(cartItemId)
+  //----------> get the index of the cart item
+  const cartItemIndex = this.cart.items.findIndex(
+    (item) => item.productId.toString() === cartItemId.toString()
+  );
+  //----------> get the cart item
+  let cartItem = this.cart.items[cartItemIndex];
+
+  if (cartItem.quantity === 1 && action === "decrease") {
+    return;
+  }
+  //----------> update the quantity
+  cartItem.quantity += action === "increase" ? 1 : -1;
+  //----------> update the total amount
+  this.cart.totalAmount =
+    this.cart.totalAmount + (action === "increase" ? product.price : -product.price);
+
+  return this.save();
+};
 module.exports = mongoose.model("user", userSchema);

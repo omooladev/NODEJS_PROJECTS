@@ -5,8 +5,7 @@ const {
   getAllCartItems,
   addProductToCart,
   viewCartPage,
-  increaseCartItemQuantity,
-  decreaseCartItemQuantity,
+  handleCartQuantityChange,
   removeCartItem,
 } = require("../controllers/user");
 
@@ -27,11 +26,8 @@ router.route("/cart/add/:productId").post(addProductToCart);
 //----------> route to get all the cart items
 router.route("/cart/items").get(getAllCartItems);
 
-// //----------> route to decrease product quantity in the cart
-// router.route("/cart/decrease/:cartItemId").post(decreaseCartItemQuantity);
-
-// //----------> route to increase product quantity in the cart
-// router.route("/cart/increase/:cartItemId").post(increaseCartItemQuantity);
+//----------> route to increase or decrease cart item quantity
+router.route("/cart/:cartItemId/:action").post(handleCartQuantityChange);
 
 //----------> route to remove product from the cart
 router.route("/cart/remove/:cartItemId").post(removeCartItem);

@@ -65,25 +65,12 @@ exports.getAllCartItems = (req, res, next) => {
     .catch((error) => console.log(error));
 };
 
-exports.increaseCartItemQuantity = (req, res) => {
+exports.handleCartQuantityChange = (req, res) => {
   //----------> get product id
-  const { cartItemId } = req.params;
-  //----------> delete product
-
+  const { cartItemId, action } = req.params;
+ 
   req.user
-    .increaseCartItemQuantity(cartItemId)
-    .then((result) => {
-      //---------->redirect to the cart page when a product is deleted
-      res.redirect("/cart");
-    })
-    .catch((error) => console.log(error));
-};
-exports.decreaseCartItemQuantity = (req, res) => {
-  //----------> get product id
-  const { cartItemId } = req.params;
-
-  req.user
-    .decreaseCartItemQuantity(cartItemId)
+    .handleCartQuantityChange(cartItemId,action)
     .then((result) => {
       //---------->redirect to the cart page when a product is deleted
       res.redirect("/cart");

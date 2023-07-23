@@ -26,7 +26,7 @@
             <h3 class="cart_item_name"><%=cartItem.name%></h3>
             <h4 class="cart_item_price">$<%=cartItem.price%></h4>
             <div class="cart_item_quantity">
-              <form method="POST" action="/cart/decrease/<%=cartItem._id%>">
+              <form method="POST" action="/cart/<%=cartItem._id%>/decrease">
                 <%if(cartItem.quantity===1){%>
                 <button class="control" disabled>-</button>
                 <%}else{%>
@@ -35,7 +35,7 @@
               </form>
 
               <h4><%=cartItem.quantity%></h4>
-              <form method="POST" action="/cart/increase/<%=cartItem._id%>">
+              <form method="POST" action="/cart/<%=cartItem._id%>/increase">
                 <button class="control" type="submit">+</button>
               </form>
             </div>
