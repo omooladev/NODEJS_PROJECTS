@@ -29,14 +29,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/docs", swaggerUI.serve);
 app.use("/api/docs", swaggerUI.setup(swaggerDocumentation));
 
-app.use("/", async (req, res, next) => {
-  User.find()
-    .then((user) => {
-      req.user = user[0]; //----------> because we know only one user will show;
-      next();
-    })
-    .catch((error) => console.log(error));
-});
+// app.use("/", async (req, res, next) => {
+//   User.find()
+//     .then((user) => {
+//       req.user = user[0]; //----------> because we know only one user will show;
+//       next();
+//     })
+//     .catch((error) => console.log(error));
+// });
 //----------> routes
 app.use("/admin", adminRouter);
 app.use("", userRouter);
@@ -47,13 +47,13 @@ const { PORT = 5000, MONGO_URI } = process.env;
 //---------->start server function
 const start = async () => {
   //----------> connect to database
-  await connectToDatabase(MONGO_URI);
+  //await connectToDatabase(MONGO_URI);
   //----------> check if user exists
-  let user = await User.find();
-  if (!user.length) {
-    user = new User({ name: "omooladev", email: "omooladev@gmail.com" });
-    await user.save();
-  }
+  // let user = await User.find();
+  // if (!user.length) {
+  //   user = new User({ name: "omooladev", email: "omooladev@gmail.com" });
+  //   await user.save();
+  // }
   //----------> listen to server
   app.listen(PORT, () => {
     console.log(`Server is listening at port ${PORT}`);

@@ -1,3 +1,4 @@
+import { changeImageHandler } from "../functions/imageHandler.js";
 //----------> This function is for handling the product name,price, and description field
 const changeProductInputHandler = (event, { inputType }) => {
   //----------> get the value of the input field
@@ -78,72 +79,9 @@ const setProductDescriptionLength = (productDescriptionValue) => {
   }
   return saveFormValidity();
 };
-//----------> resetting preview image
-const resetImagePreview = () => {
-  //once we are resetting image preview, we set the validity to false automatically
-  productImagePreview.src = "";
-  productImagePreview.alt = "";
-  productImagePreview.style.display = "none";
-  productFormInputIsValid.productImageIsValid = false;
-};
-//----------> transform image
-const transformImage = async (imageFile) => {
-  //----------> check if image file was not passed
-  if (!imageFile) {
-    return;
-  }
-  //---------->access file reader class
-  const fileReader = new FileReader();
 
-  fileReader.readAsDataURL(imageFile);
-  fileReader.onloadend = () => {
-    productImageFile = imageFile;
-    transformedImage = fileReader.result;
-    productImagePreview.src = `${fileReader.result}`;
-    productImagePreview.alt = "product image";
-    productImagePreview.style.display = "block";
 
-    saveFormValidity();
-  };
-};
-//----------> change the product image
-const changeProductImageHandler = async (event) => {
-  //----------> get the file
-  const imageFile = event.target.files[0];
 
-  //----------> check the file type and if it is not an image
-  if (!imageFile.type.includes("image/")) {
-    //----------> please provide an image
-    setFormReply({ message: "Please upload an image", type: "error" });
-    //----------> reset image preview
-    resetImagePreview();
-    //----------> check form validity
-    return saveFormValidity();
-  }
-  //----------> Default Image Size
-  const maxSize = 1024 * 1024 * 5; //? This is 5MB
-  //----------> check the size of the image file
-  const imageSize = imageFile.size;
-
-  //----------> if the size of image to be uploaded is greater then the default size
-  if (imageSize > maxSize) {
-    //----------> set an error
-    setFormReply({
-      message: "Please upload a picture smaller than 5MB",
-      type: "error",
-    });
-
-    //----------> reset image preview
-    resetImagePreview();
-    return saveFormValidity();
-  }
-
-  //---------> set image validity to true
-  productFormInputIsValid.productImageIsValid = true;
-  resetFormReply();
-  //----------> transform the image
-  await transformImage(imageFile);
-};
 //--------> all event listeners
 productName.oninput = (event) => changeProductInputHandler(event, { inputType: "Name" });
 
@@ -152,4 +90,4 @@ productPrice.oninput = (event) => changeProductInputHandler(event, { inputType: 
 productDescription.oninput = (event) =>
   changeProductInputHandler(event, { inputType: "Description" });
 
-productImage.onchange = (event) => changeProductImageHandler(event);
+productImage.onchange = (event) => changeImageHandler(event);

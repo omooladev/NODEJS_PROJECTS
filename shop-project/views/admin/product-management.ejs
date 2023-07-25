@@ -1,7 +1,7 @@
 <%-include("../includes/head")%>
 <link rel="stylesheet" href="/css/form.css" />
 <script src="/js/form/form.js" defer></script>
-<script src="/js/form/product.js" defer></script>
+<script src="/js/form/product.js" type="module" defer></script>
 </head>
 <body>
     <%-include("../includes/navigation")%>
@@ -34,7 +34,7 @@
                             <input type="file" id="product_image" name="product_image" accept="image/" style="display: none;"/>
                         <%}else{%>
                              <label for="product_image">Image</label>
-                            <input type="file" id="product_image" name="product_image" accept="image/" />
+                            <input type="file" id="product_image" name="product_image" accept="image/" multiple/>
                             <%}%>
                     </div>
                     <%if(isEditing){%>
