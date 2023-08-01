@@ -1,20 +1,22 @@
+import { previewImageTemplate } from "../templates/previewImage.js";
 //----------> transform image
-const transformImage = async (imageFile) => {
+const transformImage = async (imageFiles) => {
   //----------> check if image file was not passed
-  if (!imageFile) {
+  if (!imageFiles) {
     return;
   }
-  //---------->access file reader class
-  const fileReader = new FileReader();
-
-  fileReader.readAsDataURL(imageFile);
-  fileReader.onloadend = () => {
-    productImageFile = imageFile;
-    transformedImage = fileReader.result;
-    productImagePreview.src = `${fileReader.result}`;
-    productImagePreview.alt = "product image";
-    productImagePreview.style.display = "block";
-
-    saveFormValidity();
-  };
+  productImageFile = imageFiles;
+  for (let index = 0; index < imageFiles.length; index++) {
+    //---------->access file reader class
+    const fileReader = new FileReader();
+    const imageFile = imageFiles[index];
+    fileReader.readAsDataURL(imageFile);
+    fileReader.onloadend = async () => {
+      previewImageTemplate(fileReader.result);
+      if (index === imageFiles.length - 1) {
+        saveFormValidity();
+      }
+    };
+  }
 };
+export { transformImage };

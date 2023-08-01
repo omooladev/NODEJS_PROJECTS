@@ -1,4 +1,5 @@
 import { validateImage } from "../utils/inputValidator.js";
+import { transformImage } from "../utils/transformImage.js";
 import { setFormReply } from "./setFormReply.js";
 //----------> resetting preview image
 const resetImagePreview = () => {
@@ -21,11 +22,11 @@ const changeImageHandler = async (event) => {
     return resetImagePreview();
   }
 
-  let imageFile;
+  
   const errorData = { hasError: false, errorMessage: "" };
 
   for (let index = 0; index < imageFiles.length; index++) {
-    imageFile = imageFiles[index];
+    let imageFile = imageFiles[index];
     let validationResult = await validateImage({
       data: imageFiles,
       validationType: "others",
@@ -56,9 +57,8 @@ const changeImageHandler = async (event) => {
   setFormReply({
     replyType: "reset",
   });
-  return;
   //----------> transform the image
-  await transformImage(imageFile);
+  await transformImage(imageFiles);
 };
 
 export { changeImageHandler };

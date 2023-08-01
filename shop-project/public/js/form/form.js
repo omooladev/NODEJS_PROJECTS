@@ -10,17 +10,18 @@ const productDescription = document.querySelector("#product_description");
 const productDescriptionLength = document.querySelector("#product_description_length");
 const productImage = document.querySelector("#product_image");
 const productImagePreview = document.querySelector(".preview_image");
+const previewImageContainer = document.querySelector(".preview_image_container");
 
 //----------> declare variables
 let productImageFile;
-let transformedImage = productImagePreview.src || "";
+//let transformedImage = productImagePreview.src || "";
 
 //----------> default validity
 let productFormInputIsValid = {
   productNameIsValid: productName.value ? true : false,
   productPriceIsValid: productName.value ? true : false,
   productDescriptionIsValid: productName.value ? true : false,
-  productImageIsValid: productImagePreview.src ? true : false,
+  //productImageIsValid: productImagePreview.src ? true : false,
 };
 
 //----------> check validity of inputs and return validity of form

@@ -1,8 +1,8 @@
 import { setFormReply } from "../functions/setFormReply.js";
 
 //----------> Default Image Size
-const MAX_IMAGE_SIZE = 1024 * 1024 * 2; //? This is 2MB
-const MAX_IMAGE_SIZE_NUMBER = 2;
+const MAX_IMAGE_SIZE = 1024 * 1024 * 5; //? This is 2MB
+const MAX_IMAGE_SIZE_NUMBER = 5;
 //----------> validate images
 const validateImage = async ({ data, validationType, config }) => {
   if (validationType === "length") {
