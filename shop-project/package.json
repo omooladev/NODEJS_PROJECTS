@@ -1,7 +1,7 @@
 {
   "name": "shop-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "ShopCommerce is an online marketplace where users can browse and purchase products. Admins can also add, edit, and delete products.",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
