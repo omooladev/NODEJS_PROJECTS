@@ -1,11 +1,11 @@
 {
-  "name": "shop-project",
+  "name": "ShopProject",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start-server":"nodemon app.js"
+    "start-server": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
